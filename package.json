@@ -27,7 +27,7 @@
     "lint:eslint": "eslint --color --fix --ext .ts,.tsx .",
     "lint:lit-analyzer": "lit-analyzer",
     "rollup": "FORCE_COLOR=1 rollup -c rollup.config.js",
-    "doc": "typedoc"
+    "doc": "echo TODO"
   },
   "wireit": {
     "build": {
