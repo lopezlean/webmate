@@ -1,0 +1,14 @@
+{
+  "require": {
+    "firebase/php-jwt": "^6.2",
+    "scssphp/scssphp": "^1.11"
+  },
+  "autoload": {
+    "files": [
+      "src/Css/styled.php"
+    ],
+    "psr-4": {
+      "Webmate\\": "src/"
+    }
+  }
+}

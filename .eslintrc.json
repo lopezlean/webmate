@@ -1,0 +1,74 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint/eslint-plugin",
+    "import",
+    "eslint-plugin-import-helpers",
+    "optimize-regex",
+    "eslint-plugin-tsdoc"
+  ],
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:lit/recommended"
+  ],
+
+  "rules": {
+    "curly": ["error", "all"],
+    "dot-location": ["error", "property"],
+    "dot-notation": "error",
+    "eqeqeq": "error",
+    "no-else-return": "error",
+    "no-script-url": "error",
+    "no-useless-concat": "error",
+    "sort-keys": "warn",
+    "@typescript-eslint/member-delimiter-style": [
+      "warn",
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+
+    // lit
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+
+    "lit/no-legacy-template-syntax": "error",
+    "lit/no-template-arrow": "warn",
+
+    // PLUGIN-IMPORT-HELPERS
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "alphabetize": { "ignoreCase": true, "order": "asc" },
+        "groups": ["module", ["/^@webmate/", "absolute", "/^~/", "parent", "sibling", "index"]],
+        "newlinesBetween": "always"
+      }
+    ],
+    // IMPORT OVERRIDES
+    "import/no-duplicates": "error",
+    "import/no-unresolved": "off",
+    // OPTIMIZE REGEX
+    "optimize-regex/optimize-regex": "error",
+
+    // TSDOC
+    "tsdoc/syntax": "warn"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["es2020", "dom", "dom.iterable"],
+    "outDir": "../../dist/@webmate/core",
+    "tsBuildInfoFile": "../../dist/@webmate/core/.tsbuildinfo",
+    "rootDir": "./src"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["src/tests/*.test.ts", "src/tests/test.setup.ts"]
+}

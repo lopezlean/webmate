@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "../../dist/@webmate/components",
+    "tsBuildInfoFile": "../../dist/@webmate/components/.tsbuildinfo",
+    "rootDir": "./src"
+  },
+  "include": ["**/*.ts"]
+}

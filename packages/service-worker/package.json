@@ -1,0 +1,20 @@
+{
+  "name": "@webmate/service-worker",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    ""
+  ],
+  "dependencies": {
+    "@webmate/core": "0.0.1",
+    "comlink": "^4.4.1"
+  }
+}

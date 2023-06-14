@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["es2020", "dom", "dom.iterable"],
+    "rootDir": "./src",
+    "outDir": "../../dist/@webmate/editor",
+    "tsBuildInfoFile": "../../dist/@webmate/editor/.tsbuildinfo"
+  },
+  "include": ["**/*.ts","./package.json"],
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../worker"
+    },
+    {
+      "path": "../ui"
+    },
+    {
+      "path": "../controls"
+    },
+    {
+      "path": "../components"
+    }
+  ]
+}

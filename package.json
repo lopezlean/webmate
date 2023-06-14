@@ -1,0 +1,149 @@
+{
+  "name": "webmate",
+  "version": "0.0.1",
+  "description": "WebMate Editor",
+  "homepage": "https://webmate.app",
+  "license": "GPL",
+  "author": "Ligrila Software",
+  "type": "module",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "test": "yarn workspace @webmate/core test",
+    "lint:css": "stylelint --report-needless-disables --report-invalid-scope-disables './**/*.{ts,tsx}'",
+    "build": "wireit",
+    "build:service-worker": "wireit",
+    "build:worker": "wireit",
+    "build:editor": "wireit",
+    "start": "wds",
+    "serve": "wireit",
+    "update-version": "node scripts/update-version.js",
+    "lint": "yarn lint:lit-analyzer && yarn lint:eslint",
+    "lint:eslint": "eslint --color --fix --ext .ts,.tsx .",
+    "lint:lit-analyzer": "lit-analyzer",
+    "rollup": "FORCE_COLOR=1 rollup -c rollup.config.js",
+    "doc": "typedoc"
+  },
+  "wireit": {
+    "build": {
+      "dependencies": [
+        "build:ts",
+        "build:editor",
+        "build:service-worker",
+        "build:worker"
+      ]
+    },
+    "build:ts": {
+      "command": "tsc --build --pretty",
+      "clean": "if-file-deleted",
+      "dependencies": [],
+      "files": [
+        "tsconfig.json",
+        "packages/*/tsconfig.json",
+        "packages/**/*.ts"
+      ],
+      "output": [
+        "dist/@webmate/**/*.{js,d.ts,d.ts.map,js.map}",
+        "dist/@webmate/**/.tsbuildinfo"
+      ]
+    },
+    "build:editor": {
+      "command": "rollup -c",
+      "dependencies": [
+        "build:ts"
+      ],
+      "files": [
+        "rollup.config.js"
+      ],
+      "output": [
+        "dist/index.js",
+        "dist/index-*.js",
+        "dist/focus-visible-*.js",
+        "dist/overlay-*.js"
+      ]
+    },
+    "build:service-worker": {
+      "command": "rollup -c rollup.config.service-worker.js",
+      "dependencies": [
+        "build:ts"
+      ],
+      "files": [
+        "rollup.config.service-worker.js"
+      ],
+      "output": [
+        "dist/service-worker.js"
+      ]
+    },
+    "build:worker": {
+      "command": "rollup -c rollup.config.web-worker.js",
+      "dependencies": [
+        "build:ts"
+      ],
+      "files": [
+        "rollup.config.web-worker.js"
+      ],
+      "output": [
+        "dist/web-worker.js"
+      ]
+    },
+    "serve": {
+      "command": "web-dev-server",
+      "service": true,
+      "dependencies": [
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.1",
+    "@stylelint/postcss-css-in-js": "^0.38.0",
+    "@types/eslint": "^8.4.3",
+    "@types/prettier": "^2",
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "@web/dev-server": "^0.1.38",
+    "@web/rollup-plugin-html": "^1.11.1",
+    "browserslist": "^4.21.0",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import-helpers": "^1.2.1",
+    "eslint-plugin-lit": "^1.8.2",
+    "eslint-plugin-optimize-regex": "^1.2.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "jest": "^28.1.2",
+    "koa-bodyparser": "^4.4.0",
+    "lit-analyzer": "^1.2.1",
+    "prettier": "^2.7.1",
+    "rollup": "^3.2.5",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-sizes": "^1.0.5",
+    "rollup-plugin-summary": "^2.0.0",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
+    "stylelint-no-browser-hacks": "^1.2.1",
+    "stylelint-no-unsupported-browser-features": "^5.0.3",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "ts-lit-plugin": "^1.2.1",
+    "typedoc": "^0.24.8",
+    "typedoc-github-wiki-theme": "^1.1.0",
+    "typedoc-plugin-markdown": "^3.15.3",
+    "typescript": "~4.7.4",
+    "wireit": "^0.9.5"
+  }
+}

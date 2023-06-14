@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "../../dist/@webmate/preview-indicators",
+    "tsBuildInfoFile": "../../dist/@webmate/preview-indicators/.tsbuildinfo",
+    "rootDir": "./src"
+  },
+  "include": ["**/*.ts"],
+  "references": [
+    {
+      "path": "../core"
+    }
+  ]
+}

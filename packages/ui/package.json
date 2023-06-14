@@ -1,0 +1,15 @@
+{
+  "name": "@webmate/ui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@spectrum-web-components/theme": "^0.14.13",
+    "@webmate/core": "0.0.1"
+  }
+}

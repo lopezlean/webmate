@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ES2017", "WebWorker", "DOM"],
+    "outDir": "../../dist/@webmate/worker",
+    "tsBuildInfoFile": "../../dist/@webmate/worker/.tsbuildinfo",
+    "rootDir": "./src",
+    "skipLibCheck": true
+  },
+  "include": ["src/index.ts", "src/worker-interface.ts", "src/worker.ts"],
+  "references": [
+    {
+      "path": "../core"
+    }
+  ]
+}
