@@ -6,9 +6,11 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "typings": "../../dist/@webmate/editor/dts/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "build:docs": "api-extractor run --local --diagnostics"
   },
   "dependencies": {
     "@lit-labs/context": "^0.3.0",

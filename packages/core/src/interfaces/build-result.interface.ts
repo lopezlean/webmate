@@ -1,6 +1,6 @@
-import { FileInterface } from './file.interface';
-import { MemoryFileInterface } from './memory-file.interface';
-import { PageInterface } from './page.interface';
+import { FileInterface } from './file.interface.js';
+import { MemoryFileInterface } from './memory-file.interface.js';
+import { PageInterface } from './page.interface.js';
 
 /**
  *

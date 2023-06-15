@@ -1,6 +1,6 @@
 /* eslint-disable sort-keys */
 
-import { PageInterface } from '@webmate/core/interfaces/page.interface';
+import { PageInterface } from '@webmate/core/interfaces/page.interface.js';
 
 export const PAGE_MOCKUP: PageInterface = {
   id: 1,

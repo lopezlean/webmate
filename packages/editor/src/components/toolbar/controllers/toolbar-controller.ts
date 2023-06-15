@@ -1,7 +1,7 @@
 import { ReactiveController, ReactiveControllerHost, TemplateResult, nothing } from 'lit';
 
 import { ComponentPreviewInterface, ComponentRegisterInterface, PageManager } from '@webmate/core';
-import { ToolbarItem } from '@webmate/editor/src/components/toolbar/interfaces/toolbar-item.js';
+import { ToolbarItem } from '@webmate/editor/components/toolbar/interfaces/toolbar-item.js';
 
 export class ToolbarController implements ReactiveController {
   host: ReactiveControllerHost;

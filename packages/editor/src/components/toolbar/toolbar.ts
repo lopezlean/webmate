@@ -2,7 +2,7 @@ import { consume, provide } from '@lit-labs/context';
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import { toolbarContext } from './context/toolbar-context';
+import { toolbarContext } from './context/toolbar-context.js';
 import {
   COMPONENT_CLICK_EVENT,
   ComponentPreviewInterface,
@@ -11,9 +11,9 @@ import {
   Webmate
 } from '@webmate/core';
 import { ToolbarController } from '@webmate/editor/components/toolbar/controllers/toolbar-controller.js';
-import './panels/properties';
-import './panels/styles';
-import './panels/animations';
+import './panels/properties.js';
+import './panels/styles.js';
+import './panels/animations.js';
 import { pageContext } from '@webmate/ui';
 
 @customElement('webmate-toolbar')

@@ -1,5 +1,5 @@
-import { Observable } from './observable';
-import { PageInterface } from '@webmate/core/interfaces/page.interface';
+import { Observable } from './observable.js';
+import { PageInterface } from '@webmate/core/interfaces/page.interface.js';
 
 interface PageManagerCurrentNode {
   [key: string]: unknown;

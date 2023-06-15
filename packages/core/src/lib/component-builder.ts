@@ -1,8 +1,8 @@
-import { convertToDomAttribute } from './convert-to-dom-attribute';
-import { FileCollector } from './file-collector';
-import { StyleCollector } from './style-collector';
-import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface';
-import { ComponentInterface } from '@webmate/core/interfaces/component.interface';
+import { convertToDomAttribute } from './convert-to-dom-attribute.js';
+import { FileCollector } from './file-collector.js';
+import { StyleCollector } from './style-collector.js';
+import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface.js';
+import { ComponentInterface } from '@webmate/core/interfaces/component.interface.js';
 
 interface ComponentBuilderOptions {
   debug?: boolean;

@@ -1,4 +1,4 @@
-import { ObservableInterface, ObserverInterface } from '../interfaces/observer.interface';
+import { ObservableInterface, ObserverInterface } from '../interfaces/observer.interface.js';
 
 export class Observable<T> implements ObservableInterface<T> {
   constructor(private _value: T) {}

@@ -1,9 +1,9 @@
-export * from './component-builder';
-export * from './convert-to-dom-attribute';
-export * from './create-unique-runtime-id';
-export * from './file-collector';
-export * from './page-builder';
-export * from './page-manager';
-export * from './style-collector';
+export * from './component-builder.js';
+export * from './convert-to-dom-attribute.js';
+export * from './create-unique-runtime-id.js';
+export * from './file-collector.js';
+export * from './page-builder.js';
+export * from './page-manager.js';
+export * from './style-collector.js';
 
-export * from './webmate';
+export * from './webmate.js';

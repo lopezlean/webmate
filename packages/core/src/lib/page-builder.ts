@@ -4,13 +4,13 @@
  *
  */
 
-import { ComponentInterface } from '../interfaces/component.interface';
-import { ComponentBuilder } from './component-builder';
-import { FileCollector } from './file-collector';
-import { StyleCollector } from './style-collector';
-import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface';
-import { PageInterface } from '@webmate/core/interfaces/page.interface';
-import { Webmate } from './webmate';
+import { ComponentInterface } from '../interfaces/component.interface.js';
+import { ComponentBuilder } from './component-builder.js';
+import { FileCollector } from './file-collector.js';
+import { StyleCollector } from './style-collector.js';
+import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface.js';
+import { PageInterface } from '@webmate/core/interfaces/page.interface.js';
+import { Webmate } from './webmate.js';
 
 interface PageBuilderOptions {
   debug?: boolean;

@@ -8,6 +8,7 @@
   "type": "module",
   "module": "dist/index.js",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "workspaces": {
     "packages": [
       "packages/*"
@@ -27,7 +28,7 @@
     "lint:eslint": "eslint --color --fix --ext .ts,.tsx .",
     "lint:lit-analyzer": "lit-analyzer",
     "rollup": "FORCE_COLOR=1 rollup -c rollup.config.js",
-    "doc": "echo TODO"
+    "docs": "wireit"
   },
   "wireit": {
     "build": {
@@ -91,6 +92,26 @@
         "dist/web-worker.js"
       ]
     },
+    "build:docs:core": {
+      "command": "npm --workspace @webmate/core run build:docs",
+      "dependencies": [
+        "build:ts"
+      ]
+    },
+    "build:docs:editor": {
+      "command": "npm --workspace @webmate/editor run build:docs",
+      "dependencies": [
+        "build:ts"
+      ]
+    },
+    "docs": {
+      "command": "api-documenter markdown --input-folder docs/api --output-folder docs/api",
+      "dependencies": [
+        "build:ts",
+        "build:docs:core",
+        "build:docs:editor"
+      ]
+    },
     "serve": {
       "command": "web-dev-server",
       "service": true,
@@ -103,8 +124,11 @@
     }
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.22.20",
+    "@microsoft/api-extractor": "^7.35.3",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-terser": "^0.4.1",
+    "@rollup/plugin-typescript": "^11.1.1",
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@types/eslint": "^8.4.3",
     "@types/prettier": "^2",

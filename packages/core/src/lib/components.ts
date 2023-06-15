@@ -1,5 +1,5 @@
-import { ComponentRegisterInterface } from '../interfaces/component-register.interface';
-import { BaseRegisterClass } from './base-register-class';
+import { ComponentRegisterInterface } from '../interfaces/component-register.interface.js';
+import { BaseRegisterClass } from './base-register-class.js';
 
 export abstract class Components extends BaseRegisterClass<ComponentRegisterInterface>() {
   /**

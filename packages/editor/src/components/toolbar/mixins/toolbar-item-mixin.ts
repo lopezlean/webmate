@@ -2,9 +2,9 @@ import { consume } from '@lit-labs/context';
 import { html, LitElement, nothing, TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { toolbarContext } from '../context/toolbar-context';
-import { ToolbarController } from '../controllers/toolbar-controller';
-import { ToolbarItem } from '../interfaces/toolbar-item';
+import { toolbarContext } from '../context/toolbar-context.js';
+import { ToolbarController } from '../controllers/toolbar-controller.js';
+import { ToolbarItem } from '../interfaces/toolbar-item.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = Record<string, unknown>> = new (...args: any[]) => T;

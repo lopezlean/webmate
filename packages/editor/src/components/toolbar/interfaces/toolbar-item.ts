@@ -1,6 +1,6 @@
 import { TemplateResult } from 'lit';
 
-import { ToolbarController } from '../controllers/toolbar-controller';
+import { ToolbarController } from '../controllers/toolbar-controller.js';
 import { ComponentPreviewInterface, ComponentRegisterInterface, PageManager } from '@webmate/core';
 
 export interface ToolbarItem {

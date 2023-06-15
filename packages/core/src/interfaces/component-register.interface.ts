@@ -1,4 +1,4 @@
-import { ComponentRegisterControlInterface } from './component-register-control.interface';
+import { ComponentRegisterControlInterface } from './component-register-control.interface.js';
 
 export interface ComponentRegisterInterface<P = unknown> {
   group?: string;

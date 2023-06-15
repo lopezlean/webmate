@@ -1,3 +1,7 @@
+/**  TypeScript implementation of a deferred promise that can be resolved or
+ * rejected at a later time.
+ * @public
+ */
 export class Deferred<T> {
   readonly promise: Promise<T>;
   private _resolve!: (value: T) => void;

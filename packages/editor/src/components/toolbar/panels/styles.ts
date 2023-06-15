@@ -1,9 +1,9 @@
 import { LitElement, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { ToolbarItemMixin } from '../mixins/toolbar-item-mixin';
+import { ToolbarItemMixin } from '../mixins/toolbar-item-mixin.js';
 
-import './header';
+import './header.js';
 
 @customElement('webmate-toolbar-panel-styles')
 export class ToolbarPanelStyles extends ToolbarItemMixin(

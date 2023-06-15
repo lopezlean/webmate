@@ -13,7 +13,7 @@ export default {
         const body = ctx.request.body.page;
 
         // save post body to page.json
-        fs.writeFileSync('./data/page.json', JSON.stringify(body));
+        fs.writeFileSync('./data/page.json', JSON.stringify(body, undefined, 2));
         ctx.body = { success: true };
         ctx.status = 200;
         return;

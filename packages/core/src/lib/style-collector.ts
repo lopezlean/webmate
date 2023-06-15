@@ -1,7 +1,7 @@
-import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface';
-import { StyleInterface } from '@webmate/core//interfaces/style.interface';
-import { ComponentInterface } from '@webmate/core/interfaces/component.interface';
-import { convertToDomAttribute } from './convert-to-dom-attribute';
+import { convertToDomAttribute } from './convert-to-dom-attribute.js';
+import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface.js';
+import { ComponentInterface } from '@webmate/core/interfaces/component.interface.js';
+import { StyleInterface } from '@webmate/core/interfaces/style.interface.js';
 
 const ALL_BREAKPOINT = 'all';
 

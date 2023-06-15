@@ -3,8 +3,8 @@ import { customElement } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import '@spectrum-web-components/field-group/sp-field-group.js';
 
-import { ToolbarItemMixin } from '../mixins/toolbar-item-mixin';
-import './header';
+import { ToolbarItemMixin } from '../mixins/toolbar-item-mixin.js';
+import './header.js';
 import {
   ComponentPreviewInterface,
   ComponentRegisterInterface,

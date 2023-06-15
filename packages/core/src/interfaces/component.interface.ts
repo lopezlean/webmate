@@ -1,6 +1,6 @@
-import { FileInterface } from './file.interface';
-import { PropertyInterface } from './property.interface';
-import { StyleInterface } from './style.interface';
+import { FileInterface } from './file.interface.js';
+import { PropertyInterface } from './property.interface.js';
+import { StyleInterface } from './style.interface.js';
 
 export interface ComponentInterface {
   id: string;

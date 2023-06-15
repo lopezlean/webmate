@@ -7,7 +7,7 @@
     "outDir": "../../dist/@webmate/editor",
     "tsBuildInfoFile": "../../dist/@webmate/editor/.tsbuildinfo"
   },
-  "include": ["**/*.ts","./package.json"],
+  "include": ["src/**/*.ts","./package.json"],
   "references": [
     {
       "path": "../core"

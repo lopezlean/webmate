@@ -7,8 +7,8 @@ import '@spectrum-web-components/action-button/sp-action-button.js';
 import '@spectrum-web-components/icons-workflow/icons/sp-icon-project-edit.js';
 import '@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js';
 
-import { toolbarContext } from './context/toolbar-context';
-import { ToolbarController } from './controllers/toolbar-controller';
+import { toolbarContext } from './context/toolbar-context.js';
+import { ToolbarController } from './controllers/toolbar-controller.js';
 
 @customElement('webmate-left-task-bar')
 export class LeftTaskBar extends LitElement {

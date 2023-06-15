@@ -1,4 +1,4 @@
 export * from './controller';
-export * from './editor';
-export * from './preview';
-export * from './top-nav';
+export * from './editor.js';
+export * from './preview.js';
+export * from './top-nav.js';

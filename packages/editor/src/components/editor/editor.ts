@@ -17,11 +17,11 @@ import {
 } from '@webmate/core';
 import '@webmate/ui/theme.js';
 import '@webmate/controls/index.js';
-import './top-nav';
-import '../toolbar/toolbar';
-import '../toolbar/left-task-bar';
-import './preview';
-import { EditorContextInterface, editorContext } from '@webmate/editor/context/editor-context';
+import './top-nav.js';
+import '../toolbar/toolbar.js';
+import '../toolbar/left-task-bar.js';
+import './preview.js';
+import { EditorContextInterface, editorContext } from '@webmate/editor/context/editor-context.js';
 import { pageContext } from '@webmate/ui';
 import { WorkerInterface } from '@webmate/worker';
 

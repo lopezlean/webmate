@@ -1,4 +1,4 @@
-import { BaseRegisterClass } from './base-register-class';
+import { BaseRegisterClass } from './base-register-class.js';
 
 interface BreakpointsInterface {
   [key: string]: string;

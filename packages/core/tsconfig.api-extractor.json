@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // "paths": {}
+    // "baseUrl": "../../../",
+    "paths": {
+      "@webmate/core": ["../../dist/@webmate/core/dts/index.d.ts"]
+    }
+  }
+}
