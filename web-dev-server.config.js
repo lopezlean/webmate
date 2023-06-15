@@ -11,7 +11,10 @@ export default {
     (ctx, next) => {
       if (ctx.url === '/api/page/save' && ctx.method === 'POST') {
         const body = ctx.request.body.page;
-
+        // create data dir if not exists
+        if (!fs.existsSync('./data')) {
+          fs.mkdirSync('./data');
+        }
         // save post body to page.json
         fs.writeFileSync('./data/page.json', JSON.stringify(body, undefined, 2));
         ctx.body = { success: true };
