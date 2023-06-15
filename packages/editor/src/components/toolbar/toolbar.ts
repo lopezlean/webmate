@@ -1,4 +1,4 @@
-import { consume, provide } from '@lit-labs/context';
+import { provide } from '@lit-labs/context';
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
@@ -7,14 +7,10 @@ import {
   COMPONENT_CLICK_EVENT,
   ComponentPreviewInterface,
   ComponentRegisterInterface,
-  PageManager,
   Webmate
 } from '@webmate/core';
 import { ToolbarController } from '@webmate/editor/components/toolbar/controllers/toolbar-controller.js';
-import './panels/properties.js';
-import './panels/styles.js';
-import './panels/animations.js';
-import { pageContext } from '@webmate/ui';
+import './panels';
 
 @customElement('webmate-toolbar')
 export class Toolbar extends LitElement {
@@ -26,10 +22,6 @@ export class Toolbar extends LitElement {
   private _currentComponent: ComponentPreviewInterface | undefined = undefined;
   @state()
   private _currentComponentRegister: ComponentRegisterInterface | undefined = undefined;
-
-  @consume({ context: pageContext })
-  @state()
-  page?: PageManager;
 
   static override styles = css`
     :host {
@@ -72,10 +64,10 @@ export class Toolbar extends LitElement {
           <webmate-toolbar-panel-properties></webmate-toolbar-panel-properties>
           <webmate-toolbar-panel-styles></webmate-toolbar-panel-styles>
           <webmate-toolbar-panel-animations></webmate-toolbar-panel-animations>
+          <webmate-toolbar-panel-components></webmate-toolbar-panel-components>
           ${this.toolbarController.renderPanel(
             this._currentComponent,
-            this._currentComponentRegister,
-            this._getPageManager()
+            this._currentComponentRegister
           )}
         </div>
       </div>
@@ -105,13 +97,6 @@ export class Toolbar extends LitElement {
   private _destroy() {
     document.removeEventListener(COMPONENT_CLICK_EVENT, this._onComponentClick);
   }
-
-  private _getPageManager = (): PageManager => {
-    if (this.page) {
-      return this.page;
-    }
-    return new PageManager({ content: [] });
-  };
 }
 
 declare global {

@@ -1,1 +1,1 @@
-export * from './webmate-button';
+export * from './button.js';

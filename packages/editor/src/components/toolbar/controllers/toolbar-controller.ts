@@ -1,6 +1,6 @@
 import { ReactiveController, ReactiveControllerHost, TemplateResult, nothing } from 'lit';
 
-import { ComponentPreviewInterface, ComponentRegisterInterface, PageManager } from '@webmate/core';
+import { ComponentPreviewInterface, ComponentRegisterInterface } from '@webmate/core';
 import { ToolbarItem } from '@webmate/editor/components/toolbar/interfaces/toolbar-item.js';
 
 export class ToolbarController implements ReactiveController {
@@ -16,13 +16,12 @@ export class ToolbarController implements ReactiveController {
 
   public renderPanel(
     currentComponent: ComponentPreviewInterface | undefined,
-    currentComponentRegister: ComponentRegisterInterface | undefined,
-    pageManager: PageManager
+    currentComponentRegister: ComponentRegisterInterface | undefined
   ): TemplateResult | typeof nothing {
     if (this.currentItem === undefined) {
       return nothing;
     }
-    return this.currentItem.renderPanel(currentComponent, currentComponentRegister, pageManager);
+    return this.currentItem.renderPanel(currentComponent, currentComponentRegister);
   }
 
   public renderAction(expanded: boolean): TemplateResult | typeof nothing {

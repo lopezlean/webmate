@@ -249,7 +249,7 @@ export class Editor extends LitElement {
    * });
    * ```
    */
-  onSave = () => {
+  public onSave = () => {
     this._editorContext = { ...this._editorContext, isSaved: true };
   };
 

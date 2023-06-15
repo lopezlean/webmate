@@ -9,8 +9,7 @@ import {
   ComponentPreviewInterface,
   ComponentRegisterInterface,
   Webmate,
-  ControlRegisterInterface,
-  PageManager
+  ControlRegisterInterface
 } from '@webmate/core';
 
 @customElement('webmate-toolbar-panel-properties')
@@ -20,11 +19,8 @@ export class ToolbarPanelProperties extends ToolbarItemMixin(
 ) {
   override renderPanel(
     currentComponent: ComponentPreviewInterface | undefined,
-    currentComponentRegister: ComponentRegisterInterface | undefined,
-    pageManager: PageManager
+    currentComponentRegister: ComponentRegisterInterface | undefined
   ): TemplateResult {
-    console.log('renderPanel', currentComponent, currentComponentRegister, pageManager);
-
     const controlTemplate = [];
     if (currentComponentRegister && currentComponentRegister.controls) {
       for (const control of currentComponentRegister.controls) {
