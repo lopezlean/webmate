@@ -19,7 +19,8 @@ import '@webmate/ui/theme.js';
 import '@webmate/controls/index.js';
 import './top-nav.js';
 import '../toolbar/toolbar.js';
-import '../toolbar/left-task-bar.js';
+import '../taskbar/taskbar.js';
+import '../toolbar/toolbar-items.js';
 import './preview.js';
 import { EditorContextInterface, editorContext } from '@webmate/editor/context/editor-context.js';
 import { pageContext } from '@webmate/ui';
@@ -294,6 +295,7 @@ export class Editor extends LitElement {
           <div id="document-container">
             <webmate-toolbar></webmate-toolbar>
             ${this._renderPreview()}
+            <webmate-taskbar></webmate-taskbar>
           </div>
         </div>
       </webmate-theme>

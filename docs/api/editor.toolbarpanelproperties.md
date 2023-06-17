@@ -17,5 +17,5 @@ export declare class ToolbarPanelProperties extends ToolbarPanelProperties_base
 |  --- | --- | --- |
 |  [connectedCallback()](./editor.toolbarpanelproperties.connectedcallback.md) |  |  |
 |  [renderAction(expanded)](./editor.toolbarpanelproperties.renderaction.md) |  |  |
-|  [renderPanel(currentComponent, currentComponentRegister, pageManager)](./editor.toolbarpanelproperties.renderpanel.md) |  |  |
+|  [renderPanel(currentComponent, currentComponentRegister)](./editor.toolbarpanelproperties.renderpanel.md) |  |  |
 

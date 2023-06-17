@@ -15,7 +15,6 @@ export declare class Toolbar extends LitElement
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [page?](./editor.toolbar.page.md) |  | PageManager | _(Optional)_ |
 |  [styles](./editor.toolbar.styles.md) | <code>static</code> | import("lit").CSSResult |  |
 |  [toolbarController](./editor.toolbar.toolbarcontroller.md) |  | ToolbarController |  |
 

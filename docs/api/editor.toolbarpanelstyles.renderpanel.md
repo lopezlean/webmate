@@ -7,8 +7,16 @@
 **Signature:**
 
 ```typescript
-renderPanel(): TemplateResult;
+renderPanel(currentComponent: ComponentPreviewInterface | undefined, currentComponentRegister: ComponentRegisterInterface | undefined): TemplateResult;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  currentComponent | ComponentPreviewInterface \| undefined |  |
+|  currentComponentRegister | ComponentRegisterInterface \| undefined |  |
+
 **Returns:**
 
 TemplateResult

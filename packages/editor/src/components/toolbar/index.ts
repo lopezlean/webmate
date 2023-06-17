@@ -5,4 +5,4 @@ export * from './panels';
 export * from './interfaces';
 export * from './mixins';
 
-export * from './left-task-bar.js';
+export * from './toolbar-items.js';

@@ -9,12 +9,13 @@
 |  Class | Description |
 |  --- | --- |
 |  [Editor](./editor.editor.md) | The main editor component. |
-|  [LeftTaskBar](./editor.lefttaskbar.md) |  |
 |  [PageController](./editor.pagecontroller.md) | This controller is used to manage the page state. |
 |  [Preview](./editor.preview.md) |  |
 |  [Toolbar](./editor.toolbar.md) |  |
 |  [ToolbarController](./editor.toolbarcontroller.md) |  |
+|  [ToolbarItems](./editor.toolbaritems.md) |  |
 |  [ToolbarPanelAnimations](./editor.toolbarpanelanimations.md) |  |
+|  [ToolbarPanelComponents](./editor.toolbarpanelcomponents.md) |  |
 |  [ToolbarPanelProperties](./editor.toolbarpanelproperties.md) |  |
 |  [ToolbarPanelStyles](./editor.toolbarpanelstyles.md) |  |
 |  [TopNav](./editor.topnav.md) |  |

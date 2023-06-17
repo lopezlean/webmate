@@ -23,5 +23,5 @@ export interface ToolbarItem
 |  --- | --- |
 |  [renderAction(expanded)](./editor.toolbaritem.renderaction.md) |  |
 |  [renderActionButton(text, icon, expanded)](./editor.toolbaritem.renderactionbutton.md) |  |
-|  [renderPanel(currentComponent, currentComponentRegister, pageManager)](./editor.toolbaritem.renderpanel.md) |  |
+|  [renderPanel(currentComponent, currentComponentRegister)](./editor.toolbaritem.renderpanel.md) |  |
 

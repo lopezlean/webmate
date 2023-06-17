@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { ComponentRegisterInterface } from '@webmate/core';
+import { ComponentRegisterInterface, Webmate } from '@webmate/core';
 
 interface ButtonProperties {
   children?: string;
@@ -20,8 +20,8 @@ export class Button extends LitElement {
     }
   `;
 
-  public static registerComponent(): ComponentRegisterInterface<ButtonProperties> {
-    return {
+  public static registerComponent() {
+    const data: ComponentRegisterInterface<ButtonProperties> = {
       controls: [
         {
           defaultValue: 'Button text',
@@ -34,6 +34,8 @@ export class Button extends LitElement {
       name: 'button',
       tag: 'webmate-button'
     };
+
+    Webmate.Components.register('webmate-button', data);
   }
 
   override render() {

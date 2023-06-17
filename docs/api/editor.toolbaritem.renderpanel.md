@@ -7,7 +7,7 @@
 **Signature:**
 
 ```typescript
-renderPanel(currentComponent: ComponentPreviewInterface | undefined, currentComponentRegister: ComponentRegisterInterface | undefined, pageManager: PageManager): TemplateResult;
+renderPanel(currentComponent: ComponentPreviewInterface | undefined, currentComponentRegister: ComponentRegisterInterface | undefined): TemplateResult;
 ```
 
 ## Parameters
@@ -16,7 +16,6 @@ renderPanel(currentComponent: ComponentPreviewInterface | undefined, currentComp
 |  --- | --- | --- |
 |  currentComponent | ComponentPreviewInterface \| undefined |  |
 |  currentComponentRegister | ComponentRegisterInterface \| undefined |  |
-|  pageManager | PageManager |  |
 
 **Returns:**
 

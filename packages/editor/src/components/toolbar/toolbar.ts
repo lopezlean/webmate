@@ -11,6 +11,7 @@ import {
 } from '@webmate/core';
 import { ToolbarController } from '@webmate/editor/components/toolbar/controllers/toolbar-controller.js';
 import './panels';
+import './toolbar-items.js';
 
 @customElement('webmate-toolbar')
 export class Toolbar extends LitElement {
@@ -59,7 +60,7 @@ export class Toolbar extends LitElement {
   public override render() {
     return html`
       <div id="container">
-        <webmate-left-task-bar></webmate-left-task-bar>
+        <webmate-toolbar-items></webmate-toolbar-items>
         <div id="toolbar">
           <webmate-toolbar-panel-properties></webmate-toolbar-panel-properties>
           <webmate-toolbar-panel-styles></webmate-toolbar-panel-styles>

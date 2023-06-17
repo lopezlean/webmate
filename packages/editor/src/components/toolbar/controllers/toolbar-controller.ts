@@ -2,6 +2,7 @@ import { ReactiveController, ReactiveControllerHost, TemplateResult, nothing } f
 
 import { ComponentPreviewInterface, ComponentRegisterInterface } from '@webmate/core';
 import { ToolbarItem } from '@webmate/editor/components/toolbar/interfaces/toolbar-item.js';
+import { TOOLBAR_ITEM_CHANGED } from '@webmate/editor/constants/events';
 
 export class ToolbarController implements ReactiveController {
   host: ReactiveControllerHost;
@@ -11,7 +12,6 @@ export class ToolbarController implements ReactiveController {
 
   constructor(host: ReactiveControllerHost) {
     (this.host = host).addController(this);
-    host;
   }
 
   public renderPanel(
@@ -50,8 +50,9 @@ export class ToolbarController implements ReactiveController {
     this.currentItem = item;
     this.host.requestUpdate();
     // emit @webmate/editor/toolbar/on-current-item-changed event
-    document.dispatchEvent(
-      new CustomEvent('@webmate/editor/toolbar/on-current-item-changed', {
+
+    (this.host as unknown as HTMLElement).dispatchEvent(
+      new CustomEvent(TOOLBAR_ITEM_CHANGED, {
         bubbles: true,
         composed: true,
         detail: item

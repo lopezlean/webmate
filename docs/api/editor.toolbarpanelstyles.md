@@ -17,5 +17,5 @@ export declare class ToolbarPanelStyles extends ToolbarPanelStyles_base
 |  --- | --- | --- |
 |  [connectedCallback()](./editor.toolbarpanelstyles.connectedcallback.md) |  |  |
 |  [renderAction(expanded)](./editor.toolbarpanelstyles.renderaction.md) |  |  |
-|  [renderPanel()](./editor.toolbarpanelstyles.renderpanel.md) |  |  |
+|  [renderPanel(currentComponent, currentComponentRegister)](./editor.toolbarpanelstyles.renderpanel.md) |  |  |
 

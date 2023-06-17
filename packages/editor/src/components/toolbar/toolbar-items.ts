@@ -9,15 +9,17 @@ import '@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js';
 
 import { toolbarContext } from './context/toolbar-context.js';
 import { ToolbarController } from './controllers/toolbar-controller.js';
+import {
+  TOOLBAR_ITEM_CHANGED,
+  TOOLBAR_ITEM_CLICK,
+  TOOLBAR_ITEM_HOVER
+} from '@webmate/editor/constants/events.js';
 
-@customElement('webmate-left-task-bar')
-export class LeftTaskBar extends LitElement {
+@customElement('webmate-toolbar-items')
+export class ToolbarItems extends LitElement {
   @consume({ context: toolbarContext })
   @property({ attribute: false })
-  public toolbarController?: ToolbarController;
-
-  @property({ attribute: false })
-  currentItem = '';
+  public toolbarController!: ToolbarController;
 
   @property({
     reflect: true,
@@ -90,21 +92,21 @@ export class LeftTaskBar extends LitElement {
     super.connectedCallback();
     this.addEventListener('mouseover', this.expand);
     this.addEventListener('mouseout', this.collapse);
-    document.addEventListener('@webmate/editor/toolbar/on-current-item-changed', this.collapse);
-    this.addEventListener('@webmate/editor/toolbar/left-task-bar/action/click', this.collapse);
-    this.addEventListener('@webmate/editor/toolbar/left-task-bar/action/hover', this.expand);
+    document.addEventListener(TOOLBAR_ITEM_CHANGED, this.collapse);
+    this.addEventListener(TOOLBAR_ITEM_CLICK, this.collapse);
+    document.addEventListener(TOOLBAR_ITEM_HOVER, this.expand);
   }
   override disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('mouseover', this.expand);
     this.removeEventListener('mouseout', this.collapse);
-    document.removeEventListener('@webmate/editor/toolbar/on-current-item-changed', this.collapse);
-    this.removeEventListener('@webmate/editor/toolbar/left-task-bar/action/click', this.collapse);
-    this.removeEventListener('@webmate/editor/toolbar/left-task-bar/action/hover', this.expand);
+    document.removeEventListener(TOOLBAR_ITEM_CHANGED, this.collapse);
+    this.removeEventListener(TOOLBAR_ITEM_CLICK, this.collapse);
+    document.removeEventListener(TOOLBAR_ITEM_HOVER, this.expand);
   }
 
   private renderItems() {
-    const items = this.toolbarController?.items || [];
+    const items = this.toolbarController.items || [];
     return items.map((item) => {
       return item.renderAction(this.expanded);
     });
@@ -116,6 +118,6 @@ export class LeftTaskBar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'webmate-left-task-bar': LeftTaskBar;
+    'webmate-toolbar-items': ToolbarItems;
   }
 }

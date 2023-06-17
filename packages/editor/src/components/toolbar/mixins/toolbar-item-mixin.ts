@@ -5,6 +5,7 @@ import { property } from 'lit/decorators.js';
 import { toolbarContext } from '../context/toolbar-context.js';
 import { ToolbarController } from '../controllers/toolbar-controller.js';
 import { ToolbarItem } from '../interfaces/toolbar-item.js';
+import { TOOLBAR_ITEM_CLICK, TOOLBAR_ITEM_HOVER } from '@webmate/editor/constants/events.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = Record<string, unknown>> = new (...args: any[]) => T;
@@ -17,14 +18,15 @@ export const ToolbarItemMixin = <T extends Constructor<LitElement>>(superClass: 
     selected = false;
 
     @consume({ context: toolbarContext })
-    toolbarController?: ToolbarController;
+    toolbarController!: ToolbarController;
 
     protected onActionHover = () => {
-      if (this.toolbarController?.currentItem === (this as unknown as ToolbarItem)) {
+      if (this.toolbarController.currentItem === (this as unknown as ToolbarItem)) {
         return;
       }
+
       this.dispatchEvent(
-        new CustomEvent('@webmate/editor/toolbar/left-task-bar/action/hover', {
+        new CustomEvent(TOOLBAR_ITEM_HOVER, {
           bubbles: true,
           composed: true,
           detail: this
@@ -34,20 +36,20 @@ export const ToolbarItemMixin = <T extends Constructor<LitElement>>(superClass: 
 
     protected onActionClick = () => {
       this.dispatchEvent(
-        new CustomEvent('@webmate/editor/toolbar/left-task-bar/action/click', {
+        new CustomEvent(TOOLBAR_ITEM_CLICK, {
           bubbles: true,
           composed: true,
           detail: this
         })
       );
-      if (this.toolbarController?.currentItem === (this as unknown as ToolbarItem)) {
+      if (this.toolbarController.currentItem === (this as unknown as ToolbarItem)) {
         return;
       }
-      this.toolbarController?.setCurrentItem(this as unknown as ToolbarItem);
+      this.toolbarController.setCurrentItem(this as unknown as ToolbarItem);
     };
 
     protected renderActionButton(text: string, icon: TemplateResult, expanded: boolean) {
-      this.selected = this.toolbarController?.currentItem === (this as unknown as ToolbarItem);
+      this.selected = this.toolbarController.currentItem === (this as unknown as ToolbarItem);
 
       // add slot to icon
       icon = html`<sp-icon slot="icon" dir="ltr">${icon}</sp-icon>`;

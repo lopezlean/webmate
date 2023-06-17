@@ -34,6 +34,6 @@ export declare class ToolbarController implements ReactiveController
 |  [hostDisconnected()](./editor.toolbarcontroller.hostdisconnected.md) |  |  |
 |  [removeItem(item)](./editor.toolbarcontroller.removeitem.md) |  |  |
 |  [renderAction(expanded)](./editor.toolbarcontroller.renderaction.md) |  |  |
-|  [renderPanel(currentComponent, currentComponentRegister, pageManager)](./editor.toolbarcontroller.renderpanel.md) |  |  |
+|  [renderPanel(currentComponent, currentComponentRegister)](./editor.toolbarcontroller.renderpanel.md) |  |  |
 |  [setCurrentItem(item)](./editor.toolbarcontroller.setcurrentitem.md) |  |  |
 
