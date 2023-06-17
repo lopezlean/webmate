@@ -1,6 +1,17 @@
 import { ComponentRegisterInterface } from '../interfaces/component-register.interface.js';
 import { BaseRegisterClass } from './base-register-class.js';
 
+/**
+ * Class for registering components.]
+ * @public
+ * @example
+ * ```ts
+ * Webmate.Components.register({
+ *  name: 'webmate-button',
+ * tag: 'webmate-button',
+ * });
+ * ```
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export abstract class Components extends BaseRegisterClass<ComponentRegisterInterface<any>>() {
   /**
