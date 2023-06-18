@@ -1,0 +1,14 @@
+{
+  "name": "@webmate/extensions.debugger",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@webmate/core": "0.0.1"
+  }
+}

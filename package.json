@@ -11,16 +11,17 @@
   "typings": "dist/index.d.ts",
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/**/*"
     ]
   },
   "scripts": {
-    "test": "yarn workspace @webmate/core test",
+    "test": "npm --workspace @webmate/core run test",
     "lint:css": "stylelint --report-needless-disables --report-invalid-scope-disables './**/*.{ts,tsx}'",
     "build": "wireit",
     "build:service-worker": "wireit",
     "build:worker": "wireit",
     "build:editor": "wireit",
+    "build:ts": "wireit",
     "start": "wds",
     "serve": "wireit",
     "update-version": "node scripts/update-version.js",
@@ -45,7 +46,7 @@
       "dependencies": [],
       "files": [
         "tsconfig.json",
-        "packages/*/tsconfig.json",
+        "packages/**/tsconfig.json",
         "packages/**/*.ts"
       ],
       "output": [

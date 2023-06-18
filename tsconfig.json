@@ -73,6 +73,9 @@
 
     {
       "path": "packages/service-worker"
+    },
+    {
+      "path": "packages/extensions/debugger"
     }
   ]
 }

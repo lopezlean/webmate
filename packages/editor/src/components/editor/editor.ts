@@ -26,13 +26,6 @@ import { EditorContextInterface, editorContext } from '@webmate/editor/context/e
 import { pageContext } from '@webmate/ui';
 import { WorkerInterface } from '@webmate/worker';
 
-const fncObserver = (name: string) => (subject: unknown, value: unknown) => {
-  console.log({ subject, value }, `new ${name} added`);
-};
-Webmate.Controls.observable.subscribe(fncObserver('control'));
-Webmate.Components.observable.subscribe(fncObserver('component'));
-//Webmate.Controls.map.detach(fncObserver);
-
 /**
  *
  * The main editor component.
@@ -199,6 +192,7 @@ export class Editor extends LitElement {
     const response = await fetch(this.src);
     const page = await response.json();
     this._pageManager.page = page;
+    Webmate.PageManager = this._pageManager;
     this.requestUpdate('_pageManager');
     this._pageManager.observable.subscribe(this._onPageChanged);
   }
@@ -207,8 +201,14 @@ export class Editor extends LitElement {
     super.firstUpdated(_changedProperties);
     this._loadPage();
     await this._startBuilderWorker();
-
     await this._registerServiceWorker();
+    const initEvent = new CustomEvent('@webmate/init', {
+      detail: {
+        Webmate,
+        editorContext: this._editorContext
+      }
+    });
+    this.dispatchEvent(initEvent);
   }
 
   override update(changedProperties: PropertyValues) {

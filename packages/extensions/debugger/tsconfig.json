@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "./src",
+    "outDir": "../../../dist/@webmate/extensions/debugger",
+    "tsBuildInfoFile": "../../../dist/@webmate/extensions/debugger/.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    {
+      "path": "../../core"
+    }
+  ]
+}

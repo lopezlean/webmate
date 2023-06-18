@@ -2,9 +2,9 @@ import { Observable } from './observable.js';
 
 /**
  *
- * @param initValue
+ * @param initValue - The initial value of the observable.
  * @returns A class that extends the `BaseRegisterClass` class.
- * @description
+ * @public
  * The `BaseRegisterClass` class is a generic class that is used for Webmate register, ie: Controls, Components, Breakpoints,etc.
  * The generic type parameter `TInterface` is used to define the type of the value that will be registered
  * in the observable. The class also has a static property `observable` of type `Observable`, which is
@@ -15,7 +15,7 @@ import { Observable } from './observable.js';
 export const BaseRegisterClass = <TInterface>(initValue = {}) => {
   return class {
     /**
-     * @name observable static property
+     *
      * The property is an instance of the `Observable` class, which takes
      * a generic type parameter of `{ [key: string]: TInterface }`. This means that the observable will
      * hold a dictionary-like object where the keys are strings and the values are of type
@@ -26,8 +26,8 @@ export const BaseRegisterClass = <TInterface>(initValue = {}) => {
 
     /**
      * This function registers a value with a given name in a observable.
-     * @param {string} name - A string representing the name of the value being registered in the observable.
-     * @param {TInterface} value - TInterface, which is a generic type parameter representing the type of
+     * @param name - A string representing the name of the value being registered in the observable.
+     * @param value - TInterface, which is a generic type parameter representing the type of
      * the value being registered. It could be any type, depending on how the class or function using this
      * method is defined.
      */

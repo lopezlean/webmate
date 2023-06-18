@@ -10,7 +10,7 @@ import { FileCollector } from './file-collector.js';
 import { StyleCollector } from './style-collector.js';
 import { BuildResultInterface } from '@webmate/core/interfaces/build-result.interface.js';
 import { PageInterface } from '@webmate/core/interfaces/page.interface.js';
-import { Webmate } from './webmate.js';
+//import { Webmate } from './webmate.js';
 
 interface PageBuilderOptions {
   debug?: boolean;
@@ -21,16 +21,17 @@ interface PageBuilderOptions {
  *
  * PageBuilder is used to build a page from a PageInterface
  * and return a BuildResultInterface with the result. @see BuildResultInterface
- * @param page the page to build
- * @param options options for the page builder
+ * @param page - the page to build
+ * @param options - options for the page builder
  * @returns BuildResultInterface
  * @example
+ * ```typescript
  * const pageBuilder = new PageBuilder(page);
  * const result = pageBuilder.build();
  * if (result.success) {
  *  // do something with the result
  * }
- *
+ * ```
  */
 export class PageBuilder {
   private _page: PageInterface;
@@ -91,10 +92,10 @@ export class PageBuilder {
     try {
       // if has register we need to register all components
       if (this.page.register && this.page.register.components) {
-        Webmate.Components.registerMap(this.page.register.components);
+        //this._webmate.Components.registerMap(this.page.register.components);
       }
       if (this.page.register && this.page.register.controls) {
-        Webmate.Controls.registerMap(this.page.register.controls);
+        //this._webmate.Controls.registerMap(this.page.register.controls);
       }
       //get content and build each tag in a string
       let content = this.page.content as ComponentInterface[];
@@ -115,7 +116,7 @@ export class PageBuilder {
         }
         layout.properties.children = content;
         content = [layout];
-        console.log(layout);
+        //console.log(layout);
       }
 
       if (content) {

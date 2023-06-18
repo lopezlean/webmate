@@ -47,6 +47,7 @@ export class Preview extends LitElement {
 
     // if have register
     if (this.buildResult.page?.register) {
+      console.log('register', window);
       if (this.buildResult.page?.register.components) {
         Webmate.Components.registerMap(this.buildResult.page?.register.components);
       }
