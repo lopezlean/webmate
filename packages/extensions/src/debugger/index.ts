@@ -12,6 +12,5 @@ const activateDebugger = () => {
 console.log('Extensions: debugger registered', Webmate.Extensions.observable.value);
 Webmate.Extensions.register('debugger', {
   activate: activateDebugger,
-  location: 'toolbar',
-  name: 'debugger'
+  location: 'toolbar'
 });

@@ -1,8 +1,8 @@
 {
-  "name": "@webmate/extensions.debugger",
+  "name": "@webmate/extensions",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "private": true,
   "scripts": {
     "test": "jest",

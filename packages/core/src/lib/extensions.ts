@@ -24,12 +24,12 @@ export abstract class Extensions extends BaseRegisterClass<ExtensionInterface>()
     return this.observableLocations.value[location]?.map((name) => this.observable.value[name]);
   }
 
-  public static load(location: ExtensionLocation): void {
+  public static load(location: ExtensionLocation, context: unknown): void {
     const extensions = this.getByLocation(location);
     console.log('Extensions: load', location, extensions, this.observableLocations.value);
     if (extensions) {
       extensions.forEach((extension) => {
-        extension.activate();
+        extension.activate(context);
       });
     }
   }

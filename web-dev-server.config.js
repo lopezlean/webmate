@@ -1,7 +1,9 @@
 import * as fs from 'fs';
 import bodyParser from 'koa-bodyparser';
 
-import { PAGE_MOCKUP } from './dist/core/tests/mockups/page.mockup.js';
+//import { PAGE_MOCKUP } from './dist/core/tests/mockups/page.mockup.js';
+//import { PAGE_MOCKUP } from './packages/core/dist/tests/mockups/page.mockup.js';
+const PAGE_MOCKUP = {};
 
 export default {
   appIndex: 'index.html',
@@ -41,7 +43,7 @@ export default {
   ],
   nodeResolve: {
     exportConditions: ['development'],
-    moduleDirectories: ['./node_modules', './dist']
+    moduleDirectories: ['./node_modules', './packages']
   },
   open: false,
   preserveSymlinks: true,

@@ -2,6 +2,7 @@
   "name": "@webmate/service-worker",
   "version": "0.0.1",
   "description": "",
+  "main": "dist/index.js",
   "private": true,
   "scripts": {
     "test": "jest",

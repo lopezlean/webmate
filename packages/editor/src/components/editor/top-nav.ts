@@ -12,7 +12,7 @@ import '@spectrum-web-components/icons-workflow/icons/sp-icon-device-preview.js'
 import '@spectrum-web-components/divider/sp-divider.js';
 
 import { EDITOR_SAVE_EVENT, PageManager, PageMetaInterface } from '@webmate/core';
-import { EditorContextInterface, editorContext } from '@webmate/editor/context/editor-context';
+import { EditorContextInterface, editorContext } from '@webmate/editor/context/editor-context.js';
 import { pageContext } from '@webmate/ui';
 
 @customElement('webmate-top-nav')

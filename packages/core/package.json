@@ -2,9 +2,14 @@
   "name": "@webmate/core",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
   "private": true,
-  "typings": "../../dist/@webmate/core/dts/index.d.ts",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*"
+  },
   "scripts": {
     "test": "jest",
     "build": "tsc",

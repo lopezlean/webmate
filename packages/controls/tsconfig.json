@@ -2,8 +2,8 @@
   "extends": "../../tsconfig",
   "compilerOptions": {
     "composite": true,
-    "outDir": "../../dist/@webmate/controls",
-    "tsBuildInfoFile": "../../dist/@webmate/controls/.tsbuildinfo",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "rootDir": "./src"
   },
   "include": ["src/**/*.ts"],

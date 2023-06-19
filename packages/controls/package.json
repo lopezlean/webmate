@@ -2,7 +2,11 @@
   "name": "@webmate/controls",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.ts",
+  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "exports": {
+    "./*": "./dist/*"
+  },
   "private": true,
   "scripts": {
     "test": "jest",

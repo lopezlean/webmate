@@ -2,7 +2,7 @@ import { expose } from 'comlink';
 
 import { WorkerInterface } from './worker-interface';
 import { BuildResultInterface } from '@webmate/core/interfaces';
-import { PageBuilder } from '@webmate/core/lib/page-builder';
+import { PageBuilder } from '@webmate/core/lib/page-builder.js';
 
 const obj: WorkerInterface = {
   async build(page) {
@@ -11,6 +11,7 @@ const obj: WorkerInterface = {
       //console.log('building...');
       resolve(pageBuilder.build());
     });
+    
   }
 };
 

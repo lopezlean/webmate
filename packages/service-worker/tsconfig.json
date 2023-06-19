@@ -3,12 +3,12 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["ES2017", "WebWorker"],
-    "outDir": "../../dist/@webmate/service-worker",
-    "tsBuildInfoFile": "../../dist/@webmate/service-worker/.tsbuildinfo",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "rootDir": "./src",
     "skipLibCheck": true
   },
-  "include": ["**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": [],
   "references": [
     {

@@ -4,10 +4,10 @@
     "composite": true,
     "lib": ["es2020", "dom", "dom.iterable"],
     "rootDir": "./src",
-    "outDir": "../../dist/@webmate/editor",
-    "tsBuildInfoFile": "../../dist/@webmate/editor/.tsbuildinfo"
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
   },
-  "include": ["src/**/*.ts","./package.json"],
+  "include": ["src/**/*.ts", "./package.json"],
   "references": [
     {
       "path": "../core"

@@ -4,7 +4,7 @@ import { maybeTerser } from './rollup.config.common.js';
 
 export default [
   {
-    input: 'dist/@webmate/worker/worker.js',
+    input: 'packages/worker/dist/worker.js',
     output: {
       exports: 'none',
       file: 'dist/web-worker.js',

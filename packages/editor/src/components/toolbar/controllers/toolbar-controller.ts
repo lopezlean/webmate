@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveControllerHost, TemplateResult, nothing } f
 
 import { ComponentPreviewInterface, ComponentRegisterInterface } from '@webmate/core';
 import { ToolbarItem } from '@webmate/editor/components/toolbar/interfaces/toolbar-item.js';
-import { TOOLBAR_ITEM_CHANGED } from '@webmate/editor/constants/events';
+import { TOOLBAR_ITEM_CHANGED } from '@webmate/editor/constants/events.js';
 
 export class ToolbarController implements ReactiveController {
   host: ReactiveControllerHost;

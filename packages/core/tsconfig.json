@@ -3,10 +3,10 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["es2020", "dom", "dom.iterable"],
-    "outDir": "../../dist/core",
-    "tsBuildInfoFile": "../../dist/core/.tsbuildinfo",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "rootDir": "./src"
   },
-  "include": ["**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["src/tests/*.test.ts", "src/tests/test.setup.ts"]
 }

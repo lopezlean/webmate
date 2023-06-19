@@ -3,8 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["ES2017", "WebWorker", "DOM"],
-    "outDir": "../../dist/@webmate/worker",
-    "tsBuildInfoFile": "../../dist/@webmate/worker/.tsbuildinfo",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
     "rootDir": "./src",
     "skipLibCheck": true
   },

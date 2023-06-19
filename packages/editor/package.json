@@ -7,6 +7,9 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "../../dist/@webmate/editor/dts/index.d.ts",
+  "exports": {
+    "./*": "./dist/*"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",

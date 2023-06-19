@@ -3,10 +3,12 @@ import { customElement, query } from 'lit/decorators.js';
 
 import './taskbar-actions.js';
 import './taskbar-item.js';
+import { Webmate } from '@webmate/core';
 
 @customElement('webmate-taskbar')
 export class Toolbar extends LitElement {
   @query('#taskbar') private _taskbar!: HTMLDivElement;
+  @query('webmate-taskbar-actions') private _taskbarActions!: HTMLElement;
   static override styles = css`
     :host {
       display: flex;
@@ -63,7 +65,20 @@ export class Toolbar extends LitElement {
 
   override firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties);
+    const context = {
+      actions: this._taskbarActions
+    };
+    Webmate.Extensions.load('taskbar', context);
+    Webmate.Extensions.observable.subscribe(() => {
+      console.log('changed');
+      Webmate.Extensions.load('taskbar', context);
+    });
   }
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+  }
+
   public override render() {
     return html`
       <div id="container">
