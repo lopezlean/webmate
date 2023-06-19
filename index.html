@@ -24,6 +24,20 @@
     <!-- Sample extensions -->
     <script type="module" src="./extensions.js"></script>
 
+    <script type="module">
+      import { Webmate } from '@webmate/core';
+      setTimeout(() => {
+        Webmate.Extensions.register('test', {
+          activate: () => console.log('MODIFED test activated sleep 1'),
+          location: 'taskbar'
+        });
+      }, 3000);
+      Webmate.Extensions.register('test2', {
+        activate: () => console.log('test activated 2'),
+        location: 'taskbar'
+      });
+    </script>
+
     <script>
       const editor = document.querySelector('webmate-editor');
       editor.addEventListener('@webmate/init', (event) => {

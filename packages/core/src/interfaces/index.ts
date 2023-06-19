@@ -10,3 +10,4 @@ export * from './page.interface.js';
 export * from './property.interface.js';
 export * from './service-worker.interface.js';
 export * from './style.interface.js';
+export * from './extension.interface.js';

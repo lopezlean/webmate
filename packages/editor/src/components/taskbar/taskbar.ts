@@ -1,12 +1,15 @@
-import { LitElement, html, css, PropertyValues } from 'lit';
+import { LitElement, html, css, PropertyValues, TemplateResult } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 
 import './taskbar-actions.js';
 import './taskbar-item.js';
+import { TaskbarController } from './controllers/taskbar-controller.js';
 import { Webmate } from '@webmate/core';
 
 @customElement('webmate-taskbar')
-export class Toolbar extends LitElement {
+export class Taskbar extends LitElement {
+  public controller = new TaskbarController(this);
+
   @query('#taskbar') private _taskbar!: HTMLDivElement;
   @query('webmate-taskbar-actions') private _taskbarActions!: HTMLElement;
   static override styles = css`
@@ -66,7 +69,8 @@ export class Toolbar extends LitElement {
   override firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties);
     const context = {
-      actions: this._taskbarActions
+      taskbar: this,
+      taskbarActions: this._taskbarActions
     };
     Webmate.Extensions.load('taskbar', context);
     Webmate.Extensions.observable.subscribe(() => {
@@ -79,12 +83,20 @@ export class Toolbar extends LitElement {
     super.connectedCallback();
   }
 
+  private _getItems(): TemplateResult[] {
+    const items: TemplateResult[] = [];
+    this.controller.items.forEach((item) => {
+      items.push(html`<webmate-taskbar-item .item=${item}></webmate-taskbar-item>`);
+    });
+    return items;
+  }
+
   public override render() {
     return html`
       <div id="container">
-        <webmate-taskbar-actions></webmate-taskbar-actions>
+        <webmate-taskbar-actions .actions=${this.controller.actions}></webmate-taskbar-actions>
         <div id="taskbar" @drop=${this._onDrop} @dragover=${this._onDragOver}>
-          <webmate-taskbar-item></webmate-taskbar-item>
+          ${this._getItems()}
         </div>
       </div>
     `;
@@ -93,6 +105,6 @@ export class Toolbar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'webmate-taskbar': Toolbar;
+    'webmate-taskbar': Taskbar;
   }
 }

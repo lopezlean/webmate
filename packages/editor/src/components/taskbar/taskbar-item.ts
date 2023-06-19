@@ -1,10 +1,12 @@
+import { TaskbarItemInterface } from '@webmate/editor';
 import { LitElement, css, html } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { customElement, query, property } from 'lit/decorators.js';
 
 @customElement('webmate-taskbar-item')
 export class TaskbarItem extends LitElement {
-  // select grabber
+  @property({ type: Object }) public item!: TaskbarItemInterface;
 
+  // select grabber
   @query('#grabber') private _grabber!: HTMLElement;
 
   public override draggable = true;
@@ -15,13 +17,8 @@ export class TaskbarItem extends LitElement {
     :host {
       animation: 0.2s linear 0s 1 normal none running fadein;
       box-sizing: border-box;
-      contain: strict;
-      overflow: hidden;
-      position: absolute;
-      top: 0px;
-      height: 290px;
-      width: 258px;
-      right: 0px;
+      width: 100%;
+      --min-panel-height: 258px;
     }
 
     :host([dragging]) {
@@ -30,12 +27,8 @@ export class TaskbarItem extends LitElement {
 
     #container {
       background-color: var(--spectrum-alias-toolbar-background-color);
-      contain: strict;
       display: flex;
       flex-direction: column;
-      inset: 0px;
-      overflow: hidden;
-      position: absolute;
     }
 
     #grabber {
@@ -129,8 +122,9 @@ export class TaskbarItem extends LitElement {
       <div id="container">
         <div id="grabber" @pointerdown=${this._onPointerDown} @pointerup=${this._onPointerUp}></div>
         <div class="taskbar-item-header">
-          <h4 class="taskbar-item-title">Layers</h4>
+          <h4 class="taskbar-item-title">${this.item.label}</h4>
         </div>
+        ${this.item.render()}
       </div>
     `;
   }

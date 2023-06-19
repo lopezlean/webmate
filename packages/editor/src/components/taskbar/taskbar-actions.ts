@@ -1,18 +1,15 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+import '@spectrum-web-components/icon/sp-icon.js';
 import '@spectrum-web-components/action-button/sp-action-button.js';
 
-import '@spectrum-web-components/icons-workflow/icons/sp-icon-project-edit.js';
-import '@spectrum-web-components/icons-workflow/icons/sp-icon-add-circle.js';
+import { TaskbarActionInterface } from '@webmate/editor';
 
 @customElement('webmate-taskbar-actions')
 export class TaskbarActions extends LitElement {
-  @property({ attribute: false })
-  currentItem = '';
-
   @state()
-  private _actions = [1];
+  public actions: TaskbarActionInterface[] = [];
   @property({
     reflect: true,
     type: Boolean
@@ -59,13 +56,21 @@ export class TaskbarActions extends LitElement {
     }
   `;
 
-  public addAction() {
-    this._actions.push(1);
-  }
-
   private _getActions() {
+    // order actions by weight
+    const orderedActions = this.actions.sort((a, b) => {
+      if (a.weight === undefined) {
+        a.weight = 100;
+      }
+      if (b.weight === undefined) {
+        b.weight = 100;
+      }
+
+      return a.weight - b.weight;
+    });
+
     return html`
-      ${this._actions.map(() => {
+      ${orderedActions.map((_action) => {
         return html`
           <sp-action-button
             quiet=""
@@ -74,11 +79,9 @@ export class TaskbarActions extends LitElement {
             role="button"
             focusable=""
             tabindex="0"
-            selected=${true}
+            ?selected=${true}
           >
-            <sp-icon slot="icon" dir="ltr"
-              ><sp-icon-project-edit dir="ltr"></sp-icon-project-edit
-            ></sp-icon>
+            <sp-icon slot="icon" dir="ltr"> ${_action.icon()} </sp-icon>
           </sp-action-button>
         `;
       })}
@@ -86,10 +89,7 @@ export class TaskbarActions extends LitElement {
   }
 
   override render() {
-    return html`
-      <strong>${this.currentItem}</strong>
-      <div class="section-taskbar">${this._getActions()}</div>
-    `;
+    return html` <div class="section-taskbar">${this._getActions()}</div> `;
   }
 }
 
