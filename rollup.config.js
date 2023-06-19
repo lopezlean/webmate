@@ -3,9 +3,17 @@ import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
 import sizes from 'rollup-plugin-sizes';
 
+import pkg from './packages/editor/package.json' assert { type: 'json' };
+
+const externalDependencies = Object.keys(pkg.dependencies)
+  .concat(Object.keys(pkg.optionalDependencies || {}))
+  .filter((item) => item !== 'tslib')
+  .concat(Object.keys(pkg.peerDependencies || {}));
+
 export default [
   {
-    input: 'dist/@webmate/editor/index.js',
+    external: externalDependencies,
+    input: ['dist/@webmate/editor/index.js'],
     output: {
       dir: 'dist',
       format: 'esm'
@@ -13,8 +21,9 @@ export default [
     plugins: [
       // TODO: this means that dependencies like spectrum web components will not be included in the bundle
       resolve({
-        moduleDirectories: ['dist']
+        //moduleDirectories: ['dist']
       }),
+      // preserve class names
       terser({
         compress: {
           passes: 2,

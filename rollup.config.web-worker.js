@@ -12,7 +12,7 @@ export default [
     },
     plugins: [
       resolve({
-        moduleDirectories: ['node_modules', 'dist']
+        moduleDirectories: ['node_modules']
       }),
       ...maybeTerser
     ]

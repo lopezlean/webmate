@@ -3,8 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "lib": ["es2020", "dom", "dom.iterable"],
-    "outDir": "../../dist/@webmate/core",
-    "tsBuildInfoFile": "../../dist/@webmate/core/.tsbuildinfo",
+    "outDir": "../../dist/core",
+    "tsBuildInfoFile": "../../dist/core/.tsbuildinfo",
     "rootDir": "./src"
   },
   "include": ["**/*.ts"],

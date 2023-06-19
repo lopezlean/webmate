@@ -23,4 +23,14 @@ export abstract class Extensions extends BaseRegisterClass<ExtensionInterface>()
   public static getByLocation(location: ExtensionLocation): ExtensionInterface[] | undefined {
     return this.observableLocations.value[location]?.map((name) => this.observable.value[name]);
   }
+
+  public static load(location: ExtensionLocation): void {
+    const extensions = this.getByLocation(location);
+    console.log('Extensions: load', location, extensions, this.observableLocations.value);
+    if (extensions) {
+      extensions.forEach((extension) => {
+        extension.activate();
+      });
+    }
+  }
 }

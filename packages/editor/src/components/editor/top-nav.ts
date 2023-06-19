@@ -64,7 +64,6 @@ export class TopNav extends LitElement {
   };
 
   override render() {
-    console.log('render top nav', this._editorContext.isSaved);
     return html`
       <div id="container">
         <div id="logo">Webmate</div>

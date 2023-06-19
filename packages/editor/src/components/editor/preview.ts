@@ -113,7 +113,6 @@ export class Preview extends LitElement {
   }
 
   override render() {
-    console.log({ document: this.buildDocument });
     // create and iframe with build resu)lts data
     return html` <iframe frameborder="0" style="flex: 1 1 0%;"></iframe> `;
   }

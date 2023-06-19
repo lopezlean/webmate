@@ -45,6 +45,7 @@
       "clean": "if-file-deleted",
       "dependencies": [],
       "files": [
+        "index.html",
         "tsconfig.json",
         "packages/**/tsconfig.json",
         "packages/**/*.ts"

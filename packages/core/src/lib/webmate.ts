@@ -45,3 +45,9 @@ export abstract class Webmate {
     this._pageManager = pageManager;
   }
 }
+
+declare global {
+  interface Window {
+    Webmate: typeof Webmate;
+  }
+}

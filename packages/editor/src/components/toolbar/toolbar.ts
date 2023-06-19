@@ -78,10 +78,21 @@ export class Toolbar extends LitElement {
   override connectedCallback() {
     super.connectedCallback();
     this._init();
+    console.log(
+      'Toolbar: Loading toolbar extensions2',
+      Webmate.Extensions.observable.value,
+      Webmate.prototype.constructor
+    );
+    Webmate.Extensions.observable.subscribe(() => {
+      Webmate.Extensions.load('toolbar');
+    });
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
+    Webmate.Extensions.observable.unsubscribe(() => {
+      Webmate.Extensions.load('toolbar');
+    });
     this._destroy();
   }
 

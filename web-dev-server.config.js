@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import bodyParser from 'koa-bodyparser';
 
-import { PAGE_MOCKUP } from './dist/@webmate/core/tests/mockups/page.mockup.js';
+import { PAGE_MOCKUP } from './dist/core/tests/mockups/page.mockup.js';
 
 export default {
   appIndex: 'index.html',

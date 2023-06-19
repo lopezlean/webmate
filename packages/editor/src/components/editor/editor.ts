@@ -15,7 +15,7 @@ import {
   createUniqueRuntimeID,
   ObservableInterface
 } from '@webmate/core';
-import '@webmate/ui/theme.js';
+//import '@webmate/ui/theme.js';
 import '@webmate/controls/index.js';
 import './top-nav.js';
 import '../toolbar/toolbar.js';
@@ -212,7 +212,6 @@ export class Editor extends LitElement {
   }
 
   override update(changedProperties: PropertyValues) {
-    console.log('update 2', changedProperties);
     super.update(changedProperties);
   }
   /**
@@ -223,7 +222,6 @@ export class Editor extends LitElement {
    * @param _page - The observable page object.
    */
   _onPageChanged = (_page: ObservableInterface<PageInterface>) => {
-    console.log('page changed', _page);
     this._editorContext = { ...this._editorContext, isSaved: false };
     this.requestUpdate('_pageManager');
   };
@@ -277,7 +275,6 @@ export class Editor extends LitElement {
     if (!this._workerInit) {
       return html`<div>loading...</div>`;
     }
-    console.error('render preview');
 
     return html`
       <webmate-preview

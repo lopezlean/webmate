@@ -21,13 +21,13 @@
   <body>
     <webmate-editor src="/api/page/get"></webmate-editor>
     <script type="module" src="./index.js"></script>
-
     <!-- Sample extensions -->
     <script type="module" src="./@webmate/extensions/debugger/index.js"></script>
+
     <script>
       const editor = document.querySelector('webmate-editor');
-      document.addEventListener('@webmate/init', (event) => {
-        console.log(event.detail);
+      editor.addEventListener('@webmate/init', (event) => {
+        console.log(event.detail.Webmate.Extensions.observable.value, 'INITIALIZED');
       });
       document.addEventListener('@webmate/editor/save', (event) => {
         console.log(event.detail);
