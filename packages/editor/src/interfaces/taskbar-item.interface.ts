@@ -12,8 +12,14 @@ export interface TaskbarItemInterface {
 export interface TaskbarItemLocalStorePropertiesInterface {
   row?: number;
   height?: number;
+  active?: boolean;
 }
 
 export interface TaskbarItemPrivateInterface
   extends TaskbarItemInterface,
     TaskbarItemLocalStorePropertiesInterface {}
+
+export interface TaskbarItemEventInterface {
+  item: TaskbarItemInterface;
+  pressed: boolean;
+}

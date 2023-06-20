@@ -1,7 +1,7 @@
 import { html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { ControlBase } from './mixin/control-base';
+import { ControlBase } from './mixin/control-base.js';
 
 @customElement('webmate-control-input')
 export class Input extends ControlBase {

@@ -1,15 +1,14 @@
 import { LitElement, css, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
-import '@spectrum-web-components/icon/sp-icon.js';
-import '@spectrum-web-components/action-button/sp-action-button.js';
+import { TaskbarItemPrivateInterface } from '@webmate/editor/interfaces/taskbar-item.interface.js';
 
-import { TaskbarActionInterface } from '@webmate/editor';
+import './taskbar-action.js';
 
 @customElement('webmate-taskbar-actions')
 export class TaskbarActions extends LitElement {
-  @state()
-  public actions: TaskbarActionInterface[] = [];
+  @property({ type: Array })
+  public items: TaskbarItemPrivateInterface[] = [];
   @property({
     reflect: true,
     type: Boolean
@@ -40,50 +39,24 @@ export class TaskbarActions extends LitElement {
         var(--spectrum-global-dimension-size-50);
       overflow: hidden;
     }
-    sp-action-button {
-      margin: var(--spectrum-global-dimension-size-50) 0;
-    }
-    sp-action-button sp-icon {
-      margin-inline-start: calc(
-        (
-            var(--mod-actionbutton-edge-to-text, var(--spectrum-actionbutton-edge-to-text)) -
-              var(
-                --mod-actionbutton-edge-to-visual-only,
-                var(--spectrum-actionbutton-edge-to-visual-only)
-              )
-          ) * -1
-      );
-    }
   `;
 
   private _getActions() {
     // order actions by weight
-    const orderedActions = this.actions.sort((a, b) => {
-      if (a.weight === undefined) {
-        a.weight = 100;
+    const orderedActions = this.items.sort((a, b) => {
+      if (a.action.weight === undefined) {
+        a.action.weight = 100;
       }
-      if (b.weight === undefined) {
-        b.weight = 100;
+      if (b.action.weight === undefined) {
+        b.action.weight = 100;
       }
 
-      return a.weight - b.weight;
+      return a.action.weight - b.action.weight;
     });
 
     return html`
-      ${orderedActions.map((_action) => {
-        return html`
-          <sp-action-button
-            quiet=""
-            dir="ltr"
-            size="m"
-            role="button"
-            focusable=""
-            tabindex="0"
-            ?selected=${true}
-          >
-            <sp-icon slot="icon" dir="ltr"> ${_action.icon()} </sp-icon>
-          </sp-action-button>
-        `;
+      ${orderedActions.map((item) => {
+        return html`<webmate-taskbar-action .item=${item}></webmate-taskbar-action>`;
       })}
     `;
   }

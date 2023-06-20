@@ -3,15 +3,11 @@ import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
 import { toolbarContext } from './context/toolbar-context.js';
-import {
-  COMPONENT_CLICK_EVENT,
-  ComponentPreviewInterface,
-  ComponentRegisterInterface,
-  Webmate
-} from '@webmate/core';
+import { ComponentPreviewInterface, ComponentRegisterInterface, Webmate } from '@webmate/core';
 import { ToolbarController } from '@webmate/editor/components/toolbar/controllers/toolbar-controller.js';
 import './panels';
 import './toolbar-items.js';
+import { COMPONENT_CLICK_EVENT } from '@webmate/editor/constants/events.js';
 
 @customElement('webmate-toolbar')
 export class Toolbar extends LitElement {

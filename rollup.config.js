@@ -5,6 +5,7 @@ import sizes from 'rollup-plugin-sizes';
 
 import pkg from './packages/editor/package.json' assert { type: 'json' };
 import extensionsPkg from './packages/extensions/package.json' assert { type: 'json' };
+import previewPkg from './packages/preview-indicators/package.json' assert { type: 'json' };
 
 const externalDependencies = (pkg) =>
   Object.keys(pkg.dependencies)
@@ -53,6 +54,7 @@ export default [
     ]
   },
   {
+    external: externalDependencies(previewPkg),
     input: 'packages/preview-indicators/dist/index.js',
     output: {
       file: 'dist/preview-indicators.js',

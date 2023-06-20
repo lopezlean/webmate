@@ -1,12 +1,8 @@
 import { LitElement, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import {
-  COMPONENT_CLICK_EVENT,
-  ComponentPreviewInterface,
-  ComponentRegisterInterface,
-  Webmate
-} from '@webmate/core';
+import { ComponentPreviewInterface, ComponentRegisterInterface, Webmate } from '@webmate/core';
+import { COMPONENT_CLICK_EVENT } from '@webmate/editor/constants/events.js';
 
 @customElement('webmate-taskbar-panel-components-list')
 export class ToolbarPanelStylesRenderer extends LitElement {

@@ -1,10 +1,14 @@
 import { LitElement, html, css, PropertyValues, TemplateResult } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
 
+import { TaskbarController } from './controllers/taskbar-controller.js';
+import { TaskbarItem } from './taskbar-item';
+import { Webmate } from '@webmate/core';
+import { TASKBAR_ACTION_CLICK_EVENT } from '@webmate/editor/constants/events.js';
+import { TaskbarItemEventInterface } from '@webmate/editor/interfaces/taskbar-item.interface.js';
+
 import './taskbar-actions.js';
 import './taskbar-item.js';
-import { TaskbarController } from './controllers/taskbar-controller.js';
-import { Webmate } from '@webmate/core';
 
 @customElement('webmate-taskbar')
 export class Taskbar extends LitElement {
@@ -56,7 +60,7 @@ export class Taskbar extends LitElement {
       );
     }
   `;
-  private _highlightTimeout: NodeJS.Timeout | undefined;
+
   private _getNextPrevSibling = (event: DragEvent) => {
     let nextSibling: HTMLElement | null | undefined = null;
     let prevSibling: HTMLElement | null | undefined = null;
@@ -65,18 +69,6 @@ export class Taskbar extends LitElement {
       const taskbarItems = [
         ...this._taskbar.querySelectorAll(`webmate-taskbar-item:not([dragging])`)
       ] as HTMLElement[];
-
-      if (this._highlightTimeout) {
-        clearTimeout(this._highlightTimeout);
-      }
-      // remove hightlighted classes using a timeout
-
-      this._highlightTimeout = setTimeout(() => {
-        taskbarItems.forEach((taskbarItem) => {
-          taskbarItem.classList.remove('highlighted-top');
-          taskbarItem.classList.remove('highlighted-bottom');
-        });
-      }, 500);
 
       nextSibling = taskbarItems.find((sibling) => {
         return event.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
@@ -91,6 +83,8 @@ export class Taskbar extends LitElement {
 
   private _onDrop = (event: DragEvent) => {
     event.preventDefault();
+    setTimeout(this._removeItemsHighlight, 100);
+
     if (event.dataTransfer?.types.includes('taskbar-item')) {
       event.preventDefault();
       event.stopPropagation();
@@ -98,32 +92,65 @@ export class Taskbar extends LitElement {
       const taskbarItem = this._taskbar.querySelector(`webmate-taskbar-item[key="${data}"]`);
       if (taskbarItem) {
         const { nextSibling, prevSibling } = this._getNextPrevSibling(event);
-        if (taskbarItem) {
-          if (nextSibling) {
-            this._taskbar.insertBefore(taskbarItem, nextSibling);
-          } else {
-            if (prevSibling) {
-              this._taskbar.insertBefore(taskbarItem, prevSibling.nextSibling);
-            }
+        let orderChanged = false;
+        if (nextSibling) {
+          this._taskbar.insertBefore(taskbarItem, nextSibling);
+          orderChanged = true;
+        } else {
+          if (prevSibling) {
+            this._taskbar.insertBefore(taskbarItem, prevSibling.nextSibling);
+            orderChanged = true;
           }
+        }
+        if (orderChanged) {
+          // save positions in toolbarcontroller
+          const taskbarItems = [
+            ...this._taskbar.querySelectorAll(`webmate-taskbar-item`)
+          ] as TaskbarItem[];
+          const taskbarItemsData = taskbarItems.map((taskbarItem) => taskbarItem.item);
+          this.controller.updateTaskbarItems(taskbarItemsData);
+          this.controller.saveItemProperties();
         }
       }
     }
   };
 
+  private _removeItemsHighlight = () => {
+    const taskbarItems = [
+      ...this._taskbar.querySelectorAll(`webmate-taskbar-item:not([dragging])`)
+    ] as HTMLElement[];
+
+    if (taskbarItems) {
+      taskbarItems.forEach((taskbarItem) => {
+        taskbarItem.classList.remove('highlighted-top');
+        taskbarItem.classList.remove('highlighted-bottom');
+      });
+    }
+  };
+  private _highlightTimeout: NodeJS.Timeout | undefined;
+
   private _onDragOver = (event: DragEvent) => {
     event.preventDefault();
     (event.dataTransfer as DataTransfer).effectAllowed = 'move';
-    const { nextSibling, prevSibling } = this._getNextPrevSibling(event);
-
-    //console.log(event, taskbarItem, nextSibling, prevSibling);
-    if (nextSibling) {
-      nextSibling.classList.remove('highlighted-bottom');
-      nextSibling.classList.add('highlighted-top');
-    } else if (prevSibling) {
-      prevSibling.classList.remove('highlighted-top');
-      prevSibling.classList.add('highlighted-bottom');
+    // wait for the timeout to finish
+    if (this._highlightTimeout) {
+      return;
     }
+
+    // remove hightlighted classes using a timeout
+    const { nextSibling, prevSibling } = this._getNextPrevSibling(event);
+    this._highlightTimeout = setTimeout(() => {
+      this._removeItemsHighlight();
+      if (nextSibling) {
+        nextSibling.classList.remove('highlighted-bottom');
+        nextSibling.classList.add('highlighted-top');
+      } else if (prevSibling) {
+        prevSibling.classList.remove('highlighted-top');
+        prevSibling.classList.add('highlighted-bottom');
+      }
+      clearTimeout(this._highlightTimeout);
+      this._highlightTimeout = undefined;
+    }, 100);
   };
 
   override firstUpdated(_changedProperties: PropertyValues): void {
@@ -134,27 +161,59 @@ export class Taskbar extends LitElement {
     };
     Webmate.Extensions.load('taskbar', context);
     Webmate.Extensions.observable.subscribe(() => {
-      console.log('changed');
       Webmate.Extensions.load('taskbar', context);
     });
   }
 
-  override connectedCallback(): void {
-    super.connectedCallback();
-  }
+  private _onTaskbarActionClick = (e: CustomEvent<TaskbarItemEventInterface>) => {
+    console.log('taskbar action click', e);
+    const item = e.detail.item;
+
+    let properties = this.controller.getItemProperties(item);
+    if (!properties) {
+      properties = {};
+    }
+
+    properties.active = e.detail.pressed;
+    this.controller.setItemProperties(item, properties);
+    this.controller.saveItemProperties();
+  };
 
   private _getItems(): TemplateResult[] {
     const items: TemplateResult[] = [];
     this.controller.items.forEach((item) => {
+      // if active is boolean and false, don't show the item
+      if (typeof item.active === 'boolean' && !item.active) {
+        console.log('item is not active', item);
+        return;
+      }
       items.push(html`<webmate-taskbar-item .item=${item}></webmate-taskbar-item>`);
     });
     return items;
   }
 
+  private _getTaskbarActions(): TemplateResult {
+    const items = this.controller.items;
+    if (items.length === 0) {
+      return html``;
+    }
+    return html` <webmate-taskbar-actions .items=${items}></webmate-taskbar-actions>`;
+  }
+
+  override connectedCallback() {
+    super.connectedCallback();
+
+    document.addEventListener(TASKBAR_ACTION_CLICK_EVENT, this._onTaskbarActionClick);
+  }
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+
+    document.removeEventListener(TASKBAR_ACTION_CLICK_EVENT, this._onTaskbarActionClick);
+  }
   public override render() {
     return html`
       <div id="container">
-        <webmate-taskbar-actions .actions=${this.controller.actions}></webmate-taskbar-actions>
+        ${this._getTaskbarActions()}
         <div id="taskbar" @drop=${this._onDrop} @dragover=${this._onDragOver}>
           ${this._getItems()}
         </div>

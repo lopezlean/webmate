@@ -2,7 +2,7 @@ import { PropertiesIcon } from '@spectrum-web-components/icons-workflow';
 import { html } from 'lit';
 
 import { Webmate, ExtensionInterface } from '@webmate/core';
-import { TaskbarItemContextInterface } from '@webmate/editor';
+import { TaskbarItemContextInterface } from '@webmate/editor/interfaces/taskbar-item-context.interface.js';
 
 import './panel.js';
 
@@ -19,6 +19,15 @@ const activateDebugger = (context: TaskbarItemContextInterface) => {
     },
     id: 'properties',
     label: 'Properties',
+    render: renderPanel
+  });
+  context.taskbar.controller.addItem({
+    action: {
+      icon: PropertiesIcon,
+      weight: 0
+    },
+    id: 'properties3',
+    label: 'Properties3',
     render: renderPanel
   });
   context.taskbar.controller.addItem({

@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@webmate/core": "0.0.1"
+    "@webmate/core": "0.0.1",
+    "@webmate/editor": "0.0.1"
   }
 }

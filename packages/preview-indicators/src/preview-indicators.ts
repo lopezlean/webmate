@@ -1,7 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { COMPONENT_CLICK_EVENT, ComponentInterface } from '@webmate/core';
+import { ComponentInterface } from '@webmate/core';
+import { COMPONENT_CLICK_EVENT } from '@webmate/editor/constants/events.js';
 @customElement('webmate-preview-indicators')
 export class WebmatePreviewIndicators extends LitElement {
   static override styles = css`

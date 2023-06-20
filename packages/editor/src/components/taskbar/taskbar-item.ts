@@ -1,7 +1,7 @@
 import { LitElement, PropertyValues, css, html } from 'lit';
 import { customElement, query, property } from 'lit/decorators.js';
 
-import { TaskbarItemInterface } from '@webmate/editor';
+import { TaskbarItemInterface } from '@webmate/editor/interfaces/taskbar-item.interface.js';
 
 @customElement('webmate-taskbar-item')
 export class TaskbarItem extends LitElement {
@@ -136,5 +136,11 @@ export class TaskbarItem extends LitElement {
         ${this.item.render()}
       </div>
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'webmate-taskbar-item': TaskbarItem;
   }
 }

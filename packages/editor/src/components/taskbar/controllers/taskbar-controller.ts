@@ -5,7 +5,7 @@ import {
   TaskbarItemInterface,
   TaskbarItemLocalStorePropertiesInterface,
   TaskbarItemPrivateInterface
-} from '@webmate/editor';
+} from '@webmate/editor/interfaces';
 
 export const TASKBAR_LOCAL_STORAGE_KEY = 'webmate-taskbar-layout';
 export class TaskbarController implements ReactiveController {
@@ -31,27 +31,64 @@ export class TaskbarController implements ReactiveController {
     console.log('this._itemProperties', this._itemProperties);
   }
 
-  get items(): TaskbarItemInterface[] {
+  get items(): TaskbarItemPrivateInterface[] {
     // order items by weight
     const orderedItems = this._items.sort((a, b) => {
       const aWeight =
-        this._itemProperties?.get(a.id)?.row || this._items.findIndex((i) => i.id === a.id);
+        this._itemProperties && Number.isInteger(this._itemProperties?.get(a.id)?.row)
+          ? (this._itemProperties?.get(a.id)?.row as number)
+          : this._items.findIndex((i) => i.id === a.id);
       const bWeight =
-        this._itemProperties?.get(b.id)?.row || this._items.findIndex((i) => i.id === b.id);
+        this._itemProperties && Number.isInteger(this._itemProperties?.get(b.id)?.row)
+          ? (this._itemProperties?.get(b.id)?.row as number)
+          : this._items.findIndex((i) => i.id === b.id);
       return aWeight - bWeight;
     });
-    return orderedItems;
+    return orderedItems.map((item) => {
+      const p = this.getItemProperties(item);
+      if (p) {
+        item = { ...p, ...item };
+      }
+      return item;
+    });
   }
 
   get actions(): TaskbarActionInterface[] {
     return this._items.map((item) => item.action);
   }
 
-  public getItemProperties(id: string): TaskbarItemLocalStorePropertiesInterface | undefined {
+  public updateTaskbarItems(
+    items: TaskbarItemInterface[]
+  ): Map<string, TaskbarItemLocalStorePropertiesInterface> {
+    const itemProperties = new Map<string, TaskbarItemLocalStorePropertiesInterface>();
+    items.forEach((item, index) => {
+      const prevProperties = this.getItemProperties(item);
+      itemProperties.set(item.id, {
+        ...prevProperties,
+        row: index
+      });
+    });
+    this._itemProperties = itemProperties;
+
+    return itemProperties;
+  }
+  public getItemProperties(
+    item: TaskbarItemInterface
+  ): TaskbarItemLocalStorePropertiesInterface | undefined {
     if (this._itemProperties) {
-      return this._itemProperties.get(id);
+      console.log('GET', this._itemProperties.get(item.id));
+      return this._itemProperties.get(item.id);
     }
     return undefined;
+  }
+  public setItemProperties(
+    item: TaskbarItemInterface,
+    p: TaskbarItemLocalStorePropertiesInterface
+  ) {
+    if (this._itemProperties) {
+      this._itemProperties.set(item.id, p);
+    }
+    this.host.requestUpdate();
   }
 
   public saveItemProperties() {

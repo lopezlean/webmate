@@ -11,7 +11,8 @@ import '@spectrum-web-components/icons-workflow/icons/sp-icon-device-preview.js'
 
 import '@spectrum-web-components/divider/sp-divider.js';
 
-import { EDITOR_SAVE_EVENT, PageManager, PageMetaInterface } from '@webmate/core';
+import { PageManager, PageMetaInterface } from '@webmate/core';
+import { EDITOR_SAVE_EVENT } from '@webmate/editor/constants/events.js';
 import { EditorContextInterface, editorContext } from '@webmate/editor/context/editor-context.js';
 import { pageContext } from '@webmate/ui';
 
