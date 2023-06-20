@@ -1,15 +1,21 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-@customElement('webmate-taskbar-properties-panel')
+import './header.js';
+import './components-list.js';
+
+@customElement('webmate-taskbar-properties')
 export class TaskbarPropertiesPanel extends LitElement {
-  override render() {
-    return html`<div>Properties</div>`;
+  override render(): TemplateResult {
+    return html`
+      <webmate-taskbar-panel-header>Components</webmate-taskbar-panel-header>
+      <webmate-taskbar-panel-components-list></webmate-taskbar-panel-components-list>
+    `;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'webmate-taskbar-properties-panel': TaskbarPropertiesPanel;
+    'webmate-taskbar-properties': TaskbarPropertiesPanel;
   }
 }

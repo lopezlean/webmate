@@ -1,6 +1,7 @@
-import { TaskbarItemInterface } from '@webmate/editor';
-import { LitElement, css, html } from 'lit';
+import { LitElement, PropertyValues, css, html } from 'lit';
 import { customElement, query, property } from 'lit/decorators.js';
+
+import { TaskbarItemInterface } from '@webmate/editor';
 
 @customElement('webmate-taskbar-item')
 export class TaskbarItem extends LitElement {
@@ -95,7 +96,10 @@ export class TaskbarItem extends LitElement {
 
     // add dragging attribute to host
     this.setAttribute('dragging', '');
-    _event.dataTransfer?.setData('text', (_event.target as HTMLDivElement).id);
+    _event.dataTransfer?.setData(
+      'taskbar-item',
+      (_event.target as HTMLDivElement).getAttribute('key') as string
+    );
   };
 
   private _onDragEnd = (_event: DragEvent) => {
@@ -105,6 +109,11 @@ export class TaskbarItem extends LitElement {
     // remove dragging attribute from host
     this.removeAttribute('dragging');
   };
+
+  protected override firstUpdated(_changedProperties: PropertyValues): void {
+    super.firstUpdated(_changedProperties);
+    this.setAttribute('key', this.item.id);
+  }
 
   override connectedCallback() {
     super.connectedCallback();

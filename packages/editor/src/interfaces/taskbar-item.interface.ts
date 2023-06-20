@@ -8,3 +8,12 @@ export interface TaskbarItemInterface {
   render: () => string | TemplateResult;
   action: TaskbarActionInterface;
 }
+
+export interface TaskbarItemLocalStorePropertiesInterface {
+  row?: number;
+  height?: number;
+}
+
+export interface TaskbarItemPrivateInterface
+  extends TaskbarItemInterface,
+    TaskbarItemLocalStorePropertiesInterface {}

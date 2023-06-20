@@ -7,7 +7,7 @@ import { TaskbarItemContextInterface } from '@webmate/editor';
 import './panel.js';
 
 const renderPanel = () => {
-  return html` <webmate-taskbar-properties-panel></webmate-taskbar-properties-panel>`;
+  return html` <webmate-taskbar-properties></webmate-taskbar-properties>`;
 };
 const activateDebugger = (context: TaskbarItemContextInterface) => {
   console.log('Extensions: taskbar.properties activated', context);
