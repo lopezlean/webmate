@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 import { TaskbarItemPrivateInterface } from '@webmate/editor/interfaces/taskbar-item.interface.js';
@@ -7,7 +7,7 @@ import './taskbar-action.js';
 
 @customElement('webmate-taskbar-actions')
 export class TaskbarActions extends LitElement {
-  @property({ type: Array })
+  @property({ attribute: true, type: Array })
   public items: TaskbarItemPrivateInterface[] = [];
   @property({
     reflect: true,
@@ -41,6 +41,14 @@ export class TaskbarActions extends LitElement {
     }
   `;
 
+  override updated(_changedProperties: PropertyValues): void {
+    super.updated(_changedProperties);
+    // update if items changed
+    if (_changedProperties.has('items')) {
+      this.requestUpdate();
+    }
+  }
+
   private _getActions() {
     // order actions by weight
     const orderedActions = this.items.sort((a, b) => {
@@ -50,7 +58,6 @@ export class TaskbarActions extends LitElement {
       if (b.action.weight === undefined) {
         b.action.weight = 100;
       }
-
       return a.action.weight - b.action.weight;
     });
 

@@ -51,6 +51,11 @@ export class TaskbarAction extends LitElement {
     this.pressed = this.item?.active ?? true;
   }
 
+  override updated(_changedProperties: PropertyValues): void {
+    super.updated(_changedProperties);
+    this.pressed = this.item?.active ?? true;
+  }
+
   override render() {
     if (!this.item) {
       return html``;
@@ -63,6 +68,8 @@ export class TaskbarAction extends LitElement {
         role="button"
         focusable=""
         tabindex="0"
+        aria-pressed=${this.pressed}
+        title=${this.item.label}
         ?selected=${this.pressed}
         @click=${this._onActionClick}
       >

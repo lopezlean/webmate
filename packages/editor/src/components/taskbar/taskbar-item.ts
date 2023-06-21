@@ -1,11 +1,11 @@
 import { LitElement, PropertyValues, css, html } from 'lit';
 import { customElement, query, property } from 'lit/decorators.js';
 
-import { TaskbarItemInterface } from '@webmate/editor/interfaces/taskbar-item.interface.js';
+import { TaskbarItemPrivateInterface } from '@webmate/editor/interfaces/taskbar-item.interface.js';
 
 @customElement('webmate-taskbar-item')
 export class TaskbarItem extends LitElement {
-  @property({ type: Object }) public item!: TaskbarItemInterface;
+  @property({ type: Object }) public item!: TaskbarItemPrivateInterface;
 
   // select grabber
   @query('#grabber') private _grabber!: HTMLElement;
@@ -20,6 +20,9 @@ export class TaskbarItem extends LitElement {
       box-sizing: border-box;
       width: 100%;
       --min-panel-height: 258px;
+    }
+    :host[hidden] {
+      display: none;
     }
 
     :host([dragging]) {
@@ -113,6 +116,21 @@ export class TaskbarItem extends LitElement {
   protected override firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties);
     this.setAttribute('key', this.item.id);
+    if (!this.item.active) {
+      this.setAttribute('hidden', 'true');
+    }
+  }
+
+  override updated(_changedProperties: PropertyValues): void {
+    super.updated(_changedProperties);
+    if (_changedProperties.has('item')) {
+      this.setAttribute('key', this.item.id);
+      if (this.item.active) {
+        this.removeAttribute('hidden');
+      } else {
+        this.setAttribute('hidden', 'true');
+      }
+    }
   }
 
   override connectedCallback() {

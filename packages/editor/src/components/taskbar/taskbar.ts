@@ -103,6 +103,7 @@ export class Taskbar extends LitElement {
           }
         }
         if (orderChanged) {
+          console.log('order changed');
           // save positions in toolbarcontroller
           const taskbarItems = [
             ...this._taskbar.querySelectorAll(`webmate-taskbar-item`)
@@ -166,7 +167,6 @@ export class Taskbar extends LitElement {
   }
 
   private _onTaskbarActionClick = (e: CustomEvent<TaskbarItemEventInterface>) => {
-    console.log('taskbar action click', e);
     const item = e.detail.item;
 
     let properties = this.controller.getItemProperties(item);
@@ -177,18 +177,15 @@ export class Taskbar extends LitElement {
     properties.active = e.detail.pressed;
     this.controller.setItemProperties(item, properties);
     this.controller.saveItemProperties();
+    this.requestUpdate();
   };
 
   private _getItems(): TemplateResult[] {
     const items: TemplateResult[] = [];
     this.controller.items.forEach((item) => {
-      // if active is boolean and false, don't show the item
-      if (typeof item.active === 'boolean' && !item.active) {
-        console.log('item is not active', item);
-        return;
-      }
       items.push(html`<webmate-taskbar-item .item=${item}></webmate-taskbar-item>`);
     });
+
     return items;
   }
 
@@ -197,7 +194,7 @@ export class Taskbar extends LitElement {
     if (items.length === 0) {
       return html``;
     }
-    return html` <webmate-taskbar-actions .items=${items}></webmate-taskbar-actions>`;
+    return html`<webmate-taskbar-actions .items=${items}></webmate-taskbar-actions>`;
   }
 
   override connectedCallback() {
@@ -211,12 +208,12 @@ export class Taskbar extends LitElement {
     document.removeEventListener(TASKBAR_ACTION_CLICK_EVENT, this._onTaskbarActionClick);
   }
   public override render() {
+    const items = this._getItems();
+    const actions = this._getTaskbarActions();
     return html`
       <div id="container">
-        ${this._getTaskbarActions()}
-        <div id="taskbar" @drop=${this._onDrop} @dragover=${this._onDragOver}>
-          ${this._getItems()}
-        </div>
+        ${actions}
+        <div id="taskbar" @drop=${this._onDrop} @dragover=${this._onDragOver}>${items}</div>
       </div>
     `;
   }

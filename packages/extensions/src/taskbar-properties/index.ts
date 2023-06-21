@@ -1,4 +1,4 @@
-import { PropertiesIcon } from '@spectrum-web-components/icons-workflow';
+import { PropertiesIcon, AddIcon, EditCircleIcon } from '@spectrum-web-components/icons-workflow';
 import { html } from 'lit';
 
 import { Webmate, ExtensionInterface } from '@webmate/core';
@@ -23,7 +23,7 @@ const activateDebugger = (context: TaskbarItemContextInterface) => {
   });
   context.taskbar.controller.addItem({
     action: {
-      icon: PropertiesIcon,
+      icon: AddIcon,
       weight: 0
     },
     id: 'properties3',
@@ -32,7 +32,7 @@ const activateDebugger = (context: TaskbarItemContextInterface) => {
   });
   context.taskbar.controller.addItem({
     action: {
-      icon: PropertiesIcon,
+      icon: EditCircleIcon,
       weight: 0
     },
     id: 'properties2',

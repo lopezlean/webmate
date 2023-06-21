@@ -69,7 +69,7 @@ export class TaskbarController implements ReactiveController {
       });
     });
     this._itemProperties = itemProperties;
-
+    console.log('updateTaskbarItems', this._itemProperties);
     return itemProperties;
   }
   public getItemProperties(
@@ -88,7 +88,6 @@ export class TaskbarController implements ReactiveController {
     if (this._itemProperties) {
       this._itemProperties.set(item.id, p);
     }
-    this.host.requestUpdate();
   }
 
   public saveItemProperties() {
