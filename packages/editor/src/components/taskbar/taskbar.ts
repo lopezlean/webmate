@@ -66,7 +66,9 @@ export class Taskbar extends LitElement {
     if (event.dataTransfer?.types.includes('taskbar-item')) {
       // get other taskbarItems
       const taskbarItems = [
-        ...this._taskbar.querySelectorAll<TaskbarItem>(`webmate-taskbar-item:not([dragging])`)
+        ...this._taskbar.querySelectorAll<TaskbarItem>(
+          `webmate-taskbar-item:not([dragging]:not([hidden="true"]))`
+        )
       ];
 
       nextSibling = taskbarItems.find((sibling) => {
@@ -111,6 +113,7 @@ export class Taskbar extends LitElement {
     const nextSiblingIndex = nextSibling
       ? items.findIndex((item) => item.id === nextSibling.item.id)
       : -1;
+
     /* check if item is dropped at the same position to avoid false movements */
     if (prevSiblingIndex === taskbarItemIndex - 1 && nextSiblingIndex === taskbarItemIndex + 1) {
       return;
