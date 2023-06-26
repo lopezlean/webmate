@@ -42,7 +42,10 @@
           "script": "build:ts",
           "cascade": false
         },
-        "build:editor",
+        {
+          "script": "build:editor",
+          "cascade": false
+        },
         "build:service-worker",
         "build:worker"
       ]
@@ -68,15 +71,15 @@
         "packages/extensions/src/**/*.ts"
       ],
       "output": [
-        "packages/core/dist/**/*",
-        "packages/editor/dist/**/*",
-        "packages/ui/dist/**/*",
-        "packages/components/dist/**/*",
-        "packages/controls/dist/**/*",
-        "packages/service-worker/dist/**/*",
-        "packages/worker/dist/**/*",
-        "packages/preview-indicators/dist/**/*",
-        "packages/extensions/dist/**/*"
+        "packages/core/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/editor/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/ui/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/components/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/controls/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/service-worker/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/worker/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/preview-indicators/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}",
+        "packages/extensions/dist/**/*{.d.ts,.js,.js.map,.tsbuildinfo,.ts.map}"
       ]
     },
     "build:editor": {

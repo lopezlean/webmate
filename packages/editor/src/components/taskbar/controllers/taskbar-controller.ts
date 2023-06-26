@@ -10,7 +10,6 @@ import {
 export const TASKBAR_LOCAL_STORAGE_KEY = 'webmate-taskbar-layout';
 export class TaskbarController implements ReactiveController {
   host: ReactiveControllerHost;
-
   private _items: TaskbarItemPrivateInterface[] = [];
 
   private _itemProperties: Map<string, TaskbarItemLocalStorePropertiesInterface> | undefined =
@@ -27,8 +26,6 @@ export class TaskbarController implements ReactiveController {
     } catch (e) {
       console.log('TaskbarController::constructor', e);
     }
-
-    console.log('this._itemProperties', this._itemProperties);
   }
 
   get items(): TaskbarItemPrivateInterface[] {
@@ -69,14 +66,13 @@ export class TaskbarController implements ReactiveController {
       });
     });
     this._itemProperties = itemProperties;
-    console.log('updateTaskbarItems', this._itemProperties);
+    this.host.requestUpdate();
     return itemProperties;
   }
   public getItemProperties(
     item: TaskbarItemInterface
   ): TaskbarItemLocalStorePropertiesInterface | undefined {
     if (this._itemProperties) {
-      console.log('GET', this._itemProperties.get(item.id));
       return this._itemProperties.get(item.id);
     }
     return undefined;

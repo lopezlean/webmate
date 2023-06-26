@@ -13,7 +13,6 @@ import './taskbar-item.js';
 @customElement('webmate-taskbar')
 export class Taskbar extends LitElement {
   public controller = new TaskbarController(this);
-
   @query('#taskbar') private _taskbar!: HTMLDivElement;
   @query('webmate-taskbar-actions') private _taskbarActions!: HTMLElement;
   static override styles = css`
@@ -62,13 +61,13 @@ export class Taskbar extends LitElement {
   `;
 
   private _getNextPrevSibling = (event: DragEvent) => {
-    let nextSibling: HTMLElement | null | undefined = null;
-    let prevSibling: HTMLElement | null | undefined = null;
+    let nextSibling: TaskbarItem | null | undefined = null;
+    let prevSibling: TaskbarItem | null | undefined = null;
     if (event.dataTransfer?.types.includes('taskbar-item')) {
       // get other taskbarItems
       const taskbarItems = [
-        ...this._taskbar.querySelectorAll(`webmate-taskbar-item:not([dragging])`)
-      ] as HTMLElement[];
+        ...this._taskbar.querySelectorAll<TaskbarItem>(`webmate-taskbar-item:not([dragging])`)
+      ];
 
       nextSibling = taskbarItems.find((sibling) => {
         return event.clientY <= sibling.offsetTop + sibling.offsetHeight / 2;
@@ -81,45 +80,63 @@ export class Taskbar extends LitElement {
     return { nextSibling, prevSibling };
   };
 
-  private _onDrop = (event: DragEvent) => {
-    event.preventDefault();
+  private _onDragLeave = (_event: DragEvent) => {
     setTimeout(this._removeItemsHighlight, 100);
-
-    if (event.dataTransfer?.types.includes('taskbar-item')) {
-      event.preventDefault();
-      event.stopPropagation();
-      const data = event.dataTransfer.getData('taskbar-item');
-      const taskbarItem = this._taskbar.querySelector(`webmate-taskbar-item[key="${data}"]`);
-      if (taskbarItem) {
-        const { nextSibling, prevSibling } = this._getNextPrevSibling(event);
-        let orderChanged = false;
-        if (nextSibling) {
-          this._taskbar.insertBefore(taskbarItem, nextSibling);
-          orderChanged = true;
-        } else {
-          if (prevSibling) {
-            this._taskbar.insertBefore(taskbarItem, prevSibling.nextSibling);
-            orderChanged = true;
-          }
-        }
-        if (orderChanged) {
-          console.log('order changed');
-          // save positions in toolbarcontroller
-          const taskbarItems = [
-            ...this._taskbar.querySelectorAll(`webmate-taskbar-item`)
-          ] as TaskbarItem[];
-          const taskbarItemsData = taskbarItems.map((taskbarItem) => taskbarItem.item);
-          this.controller.updateTaskbarItems(taskbarItemsData);
-          this.controller.saveItemProperties();
-        }
-      }
+  };
+  private _onDrop = (event: DragEvent) => {
+    setTimeout(this._removeItemsHighlight, 100);
+    if (!event.dataTransfer?.types.includes('taskbar-item')) {
+      return;
     }
+    event.preventDefault();
+    event.stopPropagation();
+    const taskbarItemKey = event.dataTransfer.getData('taskbar-item');
+    const taskbarItem = this._taskbar.querySelector<TaskbarItem>(
+      `webmate-taskbar-item[key="${taskbarItemKey}"]`
+    );
+    if (!taskbarItem) {
+      return;
+    }
+
+    const { nextSibling, prevSibling } = this._getNextPrevSibling(event);
+
+    const items = this.controller.items;
+    const taskbarItemIndex = items.findIndex((item) => item.id === taskbarItemKey);
+    if (taskbarItemIndex === -1) {
+      return;
+    }
+    const prevSiblingIndex = prevSibling
+      ? items.findIndex((item) => item.id === prevSibling.item.id)
+      : -1;
+    const nextSiblingIndex = nextSibling
+      ? items.findIndex((item) => item.id === nextSibling.item.id)
+      : -1;
+    /* check if item is dropped at the same position to avoid false movements */
+    if (prevSiblingIndex === taskbarItemIndex - 1 && nextSiblingIndex === taskbarItemIndex + 1) {
+      return;
+    } else if (prevSiblingIndex === taskbarItemIndex - 1 && nextSiblingIndex === -1) {
+      return;
+    }
+
+    const valueArray = [prevSiblingIndex, nextSiblingIndex].filter((index) => index > -1);
+    if (valueArray.length === 0) {
+      return;
+    }
+
+    const replaceItemIndex =
+      taskbarItemIndex > prevSiblingIndex && taskbarItemIndex > nextSiblingIndex
+        ? Math.max(...valueArray)
+        : Math.min(...valueArray);
+
+    items.splice(replaceItemIndex, 0, items.splice(taskbarItemIndex, 1)[0]);
+    this.controller.updateTaskbarItems(items);
+    this.controller.saveItemProperties();
   };
 
   private _removeItemsHighlight = () => {
     const taskbarItems = [
-      ...this._taskbar.querySelectorAll(`webmate-taskbar-item:not([dragging])`)
-    ] as HTMLElement[];
+      ...this._taskbar.querySelectorAll<HTMLElement>(`webmate-taskbar-item:not([dragging])`)
+    ];
 
     if (taskbarItems) {
       taskbarItems.forEach((taskbarItem) => {
@@ -181,12 +198,9 @@ export class Taskbar extends LitElement {
   };
 
   private _getItems(): TemplateResult[] {
-    const items: TemplateResult[] = [];
-    this.controller.items.forEach((item) => {
-      items.push(html`<webmate-taskbar-item .item=${item}></webmate-taskbar-item>`);
+    return this.controller.items.map((item) => {
+      return html`<webmate-taskbar-item .item=${item} key=${item.id}></webmate-taskbar-item>`;
     });
-
-    return items;
   }
 
   private _getTaskbarActions(): TemplateResult {
@@ -213,7 +227,14 @@ export class Taskbar extends LitElement {
     return html`
       <div id="container">
         ${actions}
-        <div id="taskbar" @drop=${this._onDrop} @dragover=${this._onDragOver}>${items}</div>
+        <div
+          id="taskbar"
+          @drop=${this._onDrop}
+          @dragover=${this._onDragOver}
+          @dragleave=${this._onDragLeave}
+        >
+          ${items}
+        </div>
       </div>
     `;
   }

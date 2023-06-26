@@ -106,7 +106,6 @@ export class TaskbarItem extends LitElement {
   };
 
   private _onDragEnd = (_event: DragEvent) => {
-    console.log('drag end');
     _event.preventDefault();
     this._dragging = false;
     // remove dragging attribute from host
@@ -115,7 +114,6 @@ export class TaskbarItem extends LitElement {
 
   protected override firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties);
-    this.setAttribute('key', this.item.id);
     if (!this.item.active) {
       this.setAttribute('hidden', 'true');
     }
@@ -124,7 +122,6 @@ export class TaskbarItem extends LitElement {
   override updated(_changedProperties: PropertyValues): void {
     super.updated(_changedProperties);
     if (_changedProperties.has('item')) {
-      this.setAttribute('key', this.item.id);
       if (this.item.active) {
         this.removeAttribute('hidden');
       } else {
